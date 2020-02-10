@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Venues</title>
+  </head>
+  <body>
+    <ul>
+      {% for venue in venues %}
+      <li><a href="/venues/{{ venue.id }}">{{ venue.name }}</a></li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

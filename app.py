@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from models.shared import db
 from routes.artist import ArtistRoutes
+from routes.show import ShowRoutes
 from routes.venue import VenueRoutes
 
 
@@ -30,6 +31,14 @@ def artists():
 def artist(artist_id):
     return ArtistRoutes.detail(artist_id)
 
+@app.route('/shows')
+def shows():
+    return ShowRoutes.all()
+
+
+@app.route('/shows/<show_id>')
+def show(show_id):
+    return ShowRoutes.detail(show_id)
 
 @app.route('/venues')
 def venues():

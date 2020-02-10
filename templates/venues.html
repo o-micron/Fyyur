@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>All Venues</title>
-  </head>
-  <body>
-    <ul>
-      {% for venue in venues %}
-      <li><a href="/venues/{{ venue.id }}">{{ venue.name }}</a></li>
-      {% endfor %}
-    </ul>
-  </body>
-</html>
+{% set navlinks = [
+  { 'name': 'Venues', 'class': 'text-primary', 'link': '/venues'},
+  { 'name': 'Artists', 'class': '', 'link': '/artists'},
+  { 'name': 'Shows', 'class': '', 'link': '/shows'}
+]%}
+{% extends 'layouts/main.html' %}
+{% block title %}Fyyur{% endblock %}
+{% block content %}
+{% endblock %}

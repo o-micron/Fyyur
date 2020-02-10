@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>All Artists</title>
-  </head>
-  <body>
-    <ul>
-      {% for artist in data.artists %}
-      <li><a href="/artists/{{ artist.id }}">{{ artist.name }}</a></li>
-      {% endfor %}
-    </ul>
-  </body>
-</html>
+{% set navlinks = [
+  { 'name': 'Venues', 'class': '', 'link': '/venues'},
+  { 'name': 'Artists', 'class': 'text-primary', 'link': '/artists'},
+  { 'name': 'Shows', 'class': '', 'link': '/shows'}
+]%}
+{% extends 'layouts/main.html' %}
+{% block title %}Fyyur{% endblock %}
+{% block content %}
+{% endblock %}

@@ -17,6 +17,16 @@ with app.app_context():
     migrate = Migrate(app, db)
 
 
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template('errors/404.html'), 404
+
+
+@app.errorhandler(500)
+def server_error(error):
+    return render_template('errors/500.html'), 500
+
+
 @app.route('/')
 def intex():
     return render_template('index.html')
@@ -31,6 +41,7 @@ def artists():
 def artist(artist_id):
     return ArtistRoutes.detail(artist_id)
 
+
 @app.route('/shows')
 def shows():
     return ShowRoutes.all()
@@ -39,6 +50,7 @@ def shows():
 @app.route('/shows/<show_id>')
 def show(show_id):
     return ShowRoutes.detail(show_id)
+
 
 @app.route('/venues')
 def venues():

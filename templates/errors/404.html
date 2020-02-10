@@ -1,0 +1,19 @@
+{% set navlinks = [
+    { 'name': 'Venues', 'class': '', 'link': '/venues'},
+    { 'name': 'Artists', 'class': '', 'link': '/artists'},
+    { 'name': 'Shows', 'class': '', 'link': '/shows'}
+]%}
+{% extends 'layouts/main.html' %}
+{% block title %}Fyyur{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="mid">
+      <h1 style="font-family: 'Aladin', cursive;">404 NOT FOUND</h1>
+      <span>
+        <span>
+          <i class="fas fa-map-marker" style="font-size: 150px;"></i>
+        </span>
+      </span>
+    </div>
+  </div>
+{% endblock %}

@@ -7,7 +7,7 @@
   </head>
   <body>
     <ul>
-      {% for artist in artists %}
+      {% for artist in data.artists %}
       <li><a href="/artists/{{ artist.id }}">{{ artist.name }}</a></li>
       {% endfor %}
     </ul>

@@ -1,6 +1,7 @@
 import json
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from models.shared import db
 from routes.artist import ArtistRoutes
 from routes.venue import VenueRoutes
@@ -9,6 +10,10 @@ from routes.venue import VenueRoutes
 app = Flask(__name__)
 app.config.from_object('config')
 db.init_app(app)
+
+migrate = ''
+with app.app_context():
+    migrate = Migrate(app, db)
 
 
 @app.route('/')
@@ -22,8 +27,8 @@ def artists():
 
 
 @app.route('/artists/<artist_id>')
-def artist():
-    return ArtistRoutes.detail()
+def artist(artist_id):
+    return ArtistRoutes.detail(artist_id)
 
 
 @app.route('/venues')
@@ -32,5 +37,5 @@ def venues():
 
 
 @app.route('/venues/<venue_id>')
-def venue():
-    return VenueRoutes.detail()
+def venue(venue_id):
+    return VenueRoutes.detail(venue_id)

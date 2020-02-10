@@ -1,11 +1,14 @@
 from flask import render_template
-from models.shared import db
-from models import Artist, Venue
+from models.Artist import Artist
 
 
 class ArtistRoutes:
     def all():
-        return render_template('artists.html')
+        return render_template('artists.html', data={
+            'artists': Artist.query.all()
+        })
 
-    def detail():
-        return render_template('artist.html')
+    def detail(artist_id):
+        return render_template('artist.html', data={
+            'artist': Artist.query.get(artist_id)
+        })

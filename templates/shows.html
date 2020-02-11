@@ -17,7 +17,7 @@
           />
           <div class="card-body">
             <h5 class="card-title">
-              {{ show.start_time.strftime('%d-%m-%Y') }}
+              {{ show.start_time.strftime('%A %b %-d %Y at %-I:%M%p') }}
             </h5>
             <p class="card-text">
               <a href="/artists/{{ show.artist.id }}">{{ show.artist.name }}</a> 

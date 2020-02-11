@@ -1,4 +1,6 @@
 import json
+import babel
+import dateutil.parser
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -30,7 +32,7 @@ def format_datetime(value, format='medium'):
         format = "EEEE MMMM, d, y 'at' h:mma"
     elif format == 'medium':
         format = "EE MM, dd, y h:mma"
-    return babel.dates.format_datetime(date, format)
+    return babel.dates.format_datetime(value, format)
 
 
 app.jinja_env.filters['datetime'] = format_datetime

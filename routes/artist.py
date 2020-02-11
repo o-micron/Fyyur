@@ -2,7 +2,7 @@ from flask import render_template
 from models.Artist import Artist
 
 
-class ArtistRoutes:
+class ArtistRouter:
     def all():
         return render_template('artists.html', data={
             'artists': Artist.query.all()

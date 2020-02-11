@@ -6,4 +6,19 @@
 {% extends 'layouts/main.html' %}
 {% block title %}Fyyur{% endblock %}
 {% block content %}
+<div class="container">
+  <div class="mid">
+    <div class="card-deck">
+      {% for venue in data.venues %}
+      <div class="card">
+        <img src={{ venue.image_link }} class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{ venue.name }}</h5>
+          <p class="card-text"><small class="text-muted">Hosted {{ venue.children|length }} shows</small></p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
 {% endblock %}

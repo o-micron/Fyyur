@@ -2,7 +2,7 @@ from flask import render_template
 from models.Show import Show
 
 
-class ShowRoutes:
+class ShowRouter:
     def all():
         return render_template('shows.html', data={
             'shows': Show.query.all()

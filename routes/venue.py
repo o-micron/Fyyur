@@ -3,7 +3,7 @@ from models.shared import db
 from models.Venue import Venue
 
 
-class VenueRoutes:
+class VenueRouter:
     def all():
         return render_template('venues.html', data={
             'venues': Venue.query.all()

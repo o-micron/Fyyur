@@ -8,16 +8,36 @@
 {% block content %}
 <div class="container">
   <div class="mid">
-    <div class="card-deck">
-      {% for venue in data.venues %}
-      <div class="card">
-        <img src={{ venue.image_link }} class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">{{ venue.name }}</h5>
-          <p class="card-text"><small class="text-muted">Hosted {{ venue.children|length }} shows</small></p>
+    <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1">
+        {% for venue in data.venues %}
+        <div class="col mb-4">
+          <div class="card h-100">
+            <img src={{ venue.image_link }} class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{ venue.name }}</h5>
+              <p class="card-text">Hosted {{ venue.children|length }} shows</p>
+            </div>
+          </div>
         </div>
-      </div>
-      {% endfor %}
+        <div class="col mb-4">
+          <div class="card h-100">
+            <img src={{ venue.image_link }} class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{ venue.name }}</h5>
+              <p class="card-text">Hosted {{ venue.children|length }} shows</p>
+            </div>
+          </div>
+        </div>
+        <div class="col mb-4">
+          <div class="card h-100">
+            <img src={{ venue.image_link }} class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{ venue.name }}</h5>
+              <p class="card-text">Hosted {{ venue.children|length }} shows</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
     </div>
   </div>
 </div>

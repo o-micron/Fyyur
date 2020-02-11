@@ -56,7 +56,8 @@
         box-shadow: none;
       }
       .navbar-custom {
-        background-color: transparent;
+        background-color: white;
+        border-bottom: 1px solid #EFEFEF;
         color: goldenrod;
       }
       .custom-color {
@@ -70,7 +71,7 @@
     </style>
   </head>
   <body>
-    <nav class="navbar navbar-custom navbar-expand-sm">
+    <nav class="navbar sticky-top navbar-custom navbar-expand-sm">
       <a class="nav-link" href="#">
         <span style="font-size: 1.4rem;">
           <span class="custom-color">
@@ -78,6 +79,17 @@
           </span>
         </span>
       </a>
+      <ul class="nav mr-auto">
+        {% for navlink in navlinks %}
+        <li class="nav-item">
+          <a
+            class="nav-link custom-color {{ navlink.class }}"
+            href="{{ navlink.link }}"
+            >{{ navlink.name }}<span class="sr-only"></span
+          ></a>
+        </li>
+        {% endfor %}
+      </ul>
       <button
         class="navbar-toggler"
         type="button"
@@ -95,15 +107,6 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="nav mr-auto">
-          {% for navlink in navlinks %}
-          <li class="nav-item">
-            <a
-              class="nav-link navbar-custom {{ navlink.class }}"
-              href="{{ navlink.link }}"
-              >{{ navlink.name }}<span class="sr-only"></span
-            ></a>
-          </li>
-          {% endfor %}
         </ul>
         <form class="form-inline my-1 my-lg-1">
           <input

@@ -8,16 +8,36 @@
 {% block content %}
 <div class="container">
   <div class="mid">
-    <div class="card-deck">
-      {% for artist in data.artists %}
-      <div class="card">
-        <img src={{ artist.image_link }} class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">{{ artist.name }}</h5>
-          <p class="card-text"><small class="text-muted">Appeared in {{ artist.children|length }} shows</small></p>
+    <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1">
+        {% for artist in data.artists %}
+        <div class="col mb-4">
+          <div class="card h-100">
+            <img src={{ artist.image_link }} class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{ artist.name }}</h5>
+              <p class="card-text">Hosted {{ artist.children|length }} shows</p>
+            </div>
+          </div>
         </div>
-      </div>
-      {% endfor %}
+        <div class="col mb-4">
+          <div class="card h-100">
+            <img src={{ artist.image_link }} class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{ artist.name }}</h5>
+              <p class="card-text">Hosted {{ artist.children|length }} shows</p>
+            </div>
+          </div>
+        </div>
+        <div class="col mb-4">
+          <div class="card h-100">
+            <img src={{ artist.image_link }} class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{ artist.name }}</h5>
+              <p class="card-text">Hosted {{ artist.children|length }} shows</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
     </div>
   </div>
 </div>

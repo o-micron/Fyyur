@@ -68,23 +68,22 @@
     {% if USE_CUSTOM_NAV %}
     {% else %}
     <nav class="navbar sticky-top navbar-custom navbar-expand-sm">
-      <a class="nav-link" href="#">
-        <span style="font-size: 1.4rem;">
-          <span class="custom-color">
-            <i class="fas fa-fire"></i>
-          </span>
-        </span>
-      </a>
-      <ul class="nav mr-auto">
-        {% for navlink in navlinks %}
-        <li class="nav-item">
-          <a class="nav-link custom-color {{ navlink.class }}" href="{{ navlink.link }}">
-            {{ navlink.name }}
-            <span class="sr-only"></span>
+      <form class="form-inline">
+        <div class="form-group mx-sm-3 mb-2">
+          <a class="nav-link" href="#">
+            <span style="font-size: 1.4rem;">
+              <span class="custom-color">
+                <i class="fas fa-fire"></i>
+              </span>
+            </span>
           </a>
-        </li>
-        {% endfor %}
-      </ul>
+          {% for navlink in navlinks %}
+            <a class="nav-link custom-color {{ navlink.class }}" href="{{ navlink.link }}">
+              {{ navlink.name }}
+            </a>
+          {% endfor %}
+        </div>
+      </form>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span style="font-size: 1.4rem;">
           <span class="custom-color">
@@ -95,8 +94,18 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="nav mr-auto">
         </ul>
-        <form class="form-inline my-1 my-lg-1">
-          <input class="form-control mr-sm-1" type="search" placeholder="Search" aria-label="Search" />
+        <form class="form-inline">
+          <div class="form-group mx-sm-3 mb-2">
+            <a class="nav-link custom-color" href="#">
+              Artist <i class="fas fa-plus-circle"></i>
+            </a>
+            <a class="nav-link custom-color" href="#">
+              Venue <i class="fas fa-plus-circle"></i>
+            </a>
+            <a class="nav-link custom-color" href="#">
+              Show <i class="fas fa-plus-circle"></i>
+            </a>
+          </div>
         </form>
       </div>
     </nav>

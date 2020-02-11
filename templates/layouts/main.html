@@ -6,31 +6,21 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-
-    <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="../static/css/bootstrap.min.css"
-      crossorigin="anonymous"
-    />
-
-    <!-- Fonts -->
-    <link
-      href="../static/fontawesome/css/fontawesome.min.css"
-      rel="stylesheet"
-    />
-    <link href="../static/fontawesome/css/solid.min.css" rel="stylesheet" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Gothic+A1&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Aladin&display=swap"
-      rel="stylesheet"
-    />
-
+    
     <title>{% block title %}{% endblock %}</title>
+    
+    <!-- Fonts -->
+    <link href="../static/fontawesome/css/fontawesome.min.css" rel="stylesheet" />
+    <link href="../static/fontawesome/css/solid.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Gothic+A1&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Aladin&display=swap" rel="stylesheet" />
+    <!--  -->
 
+    <!-- CSS -->
+    {% if USE_CUSTOM_BOOTSTRAP %}
+    {% else %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    {% endif %}
     <style>
       * {
         font-family: "Aladin", cursive;
@@ -67,10 +57,16 @@
         width: 100%;
         height: 15vw;
         object-fit: cover;
-    }
+      }
     </style>
+    {% block links %}{% endblock %}
+    {% block styles %}{% endblock %}
+    <!--  -->
+
   </head>
   <body>
+    {% if USE_CUSTOM_NAV %}
+    {% else %}
     <nav class="navbar sticky-top navbar-custom navbar-expand-sm">
       <a class="nav-link" href="#">
         <span style="font-size: 1.4rem;">
@@ -82,23 +78,14 @@
       <ul class="nav mr-auto">
         {% for navlink in navlinks %}
         <li class="nav-item">
-          <a
-            class="nav-link custom-color {{ navlink.class }}"
-            href="{{ navlink.link }}"
-            >{{ navlink.name }}<span class="sr-only"></span
-          ></a>
+          <a class="nav-link custom-color {{ navlink.class }}" href="{{ navlink.link }}">
+            {{ navlink.name }}
+            <span class="sr-only"></span>
+          </a>
         </li>
         {% endfor %}
       </ul>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span style="font-size: 1.4rem;">
           <span class="custom-color">
             <i class="fas fa-bars"></i>
@@ -109,35 +96,20 @@
         <ul class="nav mr-auto">
         </ul>
         <form class="form-inline my-1 my-lg-1">
-          <input
-            class="form-control mr-sm-1"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
+          <input class="form-control mr-sm-1" type="search" placeholder="Search" aria-label="Search" />
         </form>
       </div>
     </nav>
+    {% endif %}
 
-    <main id="content" role="main" class="container">
-      {% block content %}{% endblock %}
-    </main>
+    {% block content %}{% endblock %}
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="../static/js/bootstrap.min.js"
-      crossorigin="anonymous"
-    ></script>
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    {% block scripts %}{% endblock %}
+    <!--  -->
+
   </body>
 </html>

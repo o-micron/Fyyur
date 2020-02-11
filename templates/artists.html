@@ -1,43 +1,26 @@
-{% set navlinks = [
-  { 'name': 'Venues', 'class': '', 'link': '/venues'},
-  { 'name': 'Artists', 'class': 'text-primary', 'link': '/artists'},
-  { 'name': 'Shows', 'class': '', 'link': '/shows'}
-]%}
+{% set navlinks = [ { 'name': 'Venues', 'class': '', 'link': '/venues'}, {
+'name': 'Artists', 'class': 'text-primary', 'link': '/artists'}, { 'name':
+'Shows', 'class': '', 'link': '/shows'} ] %}
 {% extends 'layouts/main.html' %}
-{% block title %}Fyyur{% endblock %}
-{% block content %}
+{% block title %}Artists{% endblock %} {% block content %}
 <div class="container">
   <div class="mid">
     <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1">
-        {% for artist in data.artists %}
-        <div class="col mb-4">
-          <div class="card h-100">
-            <img src={{ artist.image_link }} class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">{{ artist.name }}</h5>
-              <p class="card-text">Performed {{ artist.children|length }} shows</p>
-            </div>
+      {% for artist in data.artists|sort(attribute='name') %}
+      <div class="col mb-4">
+        <div class="card h-100">
+          <img src="{{ artist.image_link }}" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <a href="/artists/{{ artist.id }}" class="card-title"
+              >{{ artist.name }}</a
+            >
+            <p class="card-text">
+              Performed {{ artist.children|length }} shows
+            </p>
           </div>
         </div>
-        <div class="col mb-4">
-          <div class="card h-100">
-            <img src={{ artist.image_link }} class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">{{ artist.name }}</h5>
-              <p class="card-text">Performed {{ artist.children|length }} shows</p>
-            </div>
-          </div>
-        </div>
-        <div class="col mb-4">
-          <div class="card h-100">
-            <img src={{ artist.image_link }} class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">{{ artist.name }}</h5>
-              <p class="card-text">Performed {{ artist.children|length }} shows</p>
-            </div>
-          </div>
-        </div>
-        {% endfor %}
+      </div>
+      {% endfor %}
     </div>
   </div>
 </div>

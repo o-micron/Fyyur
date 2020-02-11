@@ -11,5 +11,5 @@ class VenueRouter:
 
     def detail(venue_id):
         return render_template('venue.html', data={
-            'venue': Venue.query.filter_by(id=venue_id)
+            'venue': Venue.query.get(venue_id)
         })

@@ -1,44 +1,34 @@
-{% set navlinks = [
-    { 'name': 'Venues', 'class': '', 'link': '/venues'},
-    { 'name': 'Artists', 'class': '', 'link': '/artists'},
-    { 'name': 'Shows', 'class': 'text-primary', 'link': '/shows'}
-  ]%}
-  {% extends 'layouts/main.html' %}
-  {% block title %}Fyyur{% endblock %}
-  {% block content %}
-  <div class="container">
-    <div class="mid">
-      <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1">
-          {% for show in data.shows %}
-          <div class="col mb-4">
-            <div class="card h-100">
-              <img src={{ show.artist.image_link }} class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">{{ show.start_time.strftime('%d-%m-%Y') }}</h5>
-                <p class="card-text">{{ show.artist.name }} playing at {{ show.venue.name }}</p>
-              </div>
-            </div>
+{% set navlinks = [ { 'name': 'Venues', 'class': '', 'link': '/venues'}, {
+'name': 'Artists', 'class': '', 'link': '/artists'}, { 'name': 'Shows', 'class':
+'text-primary', 'link': '/shows'} ]%}
+{% extends 'layouts/main.html' %}
+{% block title %}Shows{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="mid">
+    <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1">
+      {% for show in data.shows|sort(attribute='start_time') %}
+      <div class="col mb-4">
+        <div class="card h-100">
+          <img
+            src="{{ show.artist.image_link }}"
+            class="card-img-top"
+            alt="..."
+          />
+          <div class="card-body">
+            <h5 class="card-title">
+              {{ show.start_time.strftime('%d-%m-%Y') }}
+            </h5>
+            <p class="card-text">
+              <a href="/artists/{{ show.artist.id }}">{{ show.artist.name }}</a> 
+              <p>playing at</p>
+              <a href="/venues/{{ show.venue.id }}">{{ show.venue.name }}</a> 
+            </p>
           </div>
-          <div class="col mb-4">
-            <div class="card h-100">
-              <img src={{ show.artist.image_link }} class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">{{ show.start_time.strftime('%d-%m-%Y') }}</h5>
-                <p class="card-text">{{ show.artist.name }} playing at {{ show.venue.name }}</p>
-              </div>
-            </div>
-          </div>
-          <div class="col mb-4">
-            <div class="card h-100">
-              <img src={{ show.artist.image_link }} class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">{{ show.start_time.strftime('%d-%m-%Y') }}</h5>
-                <p class="card-text">{{ show.artist.name }} playing at {{ show.venue.name }}</p>
-              </div>
-            </div>
-          </div>
-          {% endfor %}
+        </div>
       </div>
+      {% endfor %}
     </div>
   </div>
-  {% endblock %}
+</div>
+{% endblock %}

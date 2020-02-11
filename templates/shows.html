@@ -6,4 +6,39 @@
   {% extends 'layouts/main.html' %}
   {% block title %}Fyyur{% endblock %}
   {% block content %}
+  <div class="container">
+    <div class="mid">
+      <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1">
+          {% for show in data.shows %}
+          <div class="col mb-4">
+            <div class="card h-100">
+              <img src={{ show.artist.image_link }} class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{ show.start_time.strftime('%d-%m-%Y') }}</h5>
+                <p class="card-text">{{ show.artist.name }} playing at {{ show.venue.name }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col mb-4">
+            <div class="card h-100">
+              <img src={{ show.artist.image_link }} class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{ show.start_time.strftime('%d-%m-%Y') }}</h5>
+                <p class="card-text">{{ show.artist.name }} playing at {{ show.venue.name }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col mb-4">
+            <div class="card h-100">
+              <img src={{ show.artist.image_link }} class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{ show.start_time.strftime('%d-%m-%Y') }}</h5>
+                <p class="card-text">{{ show.artist.name }} playing at {{ show.venue.name }}</p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+      </div>
+    </div>
+  </div>
   {% endblock %}

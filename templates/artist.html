@@ -1,11 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Artist</title>
-  </head>
-  <body>
-    <h2>Welcome to {{ data.artist.name }}'s official page</h2>
-  </body>
-</html>
+{% set navlinks = [ { 'name': 'Venues', 'class': '', 'link': '/venues'}, {
+'name': 'Artists', 'class': '', 'link': '/artists'}, { 'name': 'Shows', 'class':
+'', 'link': '/shows'} ] %}
+{% extends 'layouts/main.html' %}
+{% block title %}Artists{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="row" style="margin-top: 50px;">
+    <div class="col-3">
+      <img
+        src="{{ data.artist.image_link }}"
+        alt="..."
+        class="card-img-top"
+        style="padding-bottom: 20px;"
+      />
+      <h4>{{ data.artist.name }}</h4>
+    </div>
+    <div class="col-9">
+      {% if data.artist.seeking_venue_description != "None" %}
+      <div class="card">
+        <div class="card-header">
+          Heads up !
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">We're Currently seeking performance venues</h5>
+          <p class="card-text">{{ data.artist.seeking_venue_description }}</p>
+          <a href="#" class="btn btn-primary">Help us</a>
+        </div>
+      </div>
+        {% endif %}
+        <h3>Past Shows</h3>
+        <div class="overflow-auto" style="background-color: teal; padding-top: 20px; padding-bottom: 40px">
+        <div class="container-fluid">
+          <h2>Bootstrap Horizontal Scrolling with Flexbox</h2>
+          <div class="row flex-row flex-nowrap">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+              <div class="card card-block">Card</div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+              <div class="card card-block">Card</div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+              <div class="card card-block">Card</div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+              <div class="card card-block">Card</div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+              <div class="card card-block">Card</div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+              <div class="card card-block">Card</div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+              <div class="card card-block">Card</div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+              <div class="card card-block">Card</div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+              <div class="card card-block">Card</div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+              <div class="card card-block">Card</div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+              <div class="card card-block">Card</div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+              <div class="card card-block">Card</div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+              <div class="card card-block">Card</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+</div>

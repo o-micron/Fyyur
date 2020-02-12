@@ -204,7 +204,7 @@ for artist in artists:
     (id, name, genres, city, state, phone, website, seeking_venue_description, image_link, facebook_link)
     VALUES
     ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');
-    """ % (artist.get('id'), artist.get('name'), ','.join(artist.get('genres')), artist.get('city'), artist.get('state'), artist.get('phone'), artist.get('website'), artist.get('seeking_venue_description'), artist.get('image_link'), artist.get('facebook_link'))
+    """ % (artist.get('id'), artist.get('name'), ','.join(artist.get('genres')), artist.get('city'), artist.get('state'), artist.get('phone'), artist.get('website'), artist.get('seeking_description'), artist.get('image_link'), artist.get('facebook_link'))
     cursor.execute(cmd)
 
 connection.commit()
@@ -215,7 +215,7 @@ for venue in venues:
     (id, name, genres, city, state, address, phone, seeking_talent_description, website, image_link, facebook_link)
     VALUES
     ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');
-    """ % (venue.get('id'), venue.get('name'), ','.join(venue.get('genres')), venue.get('city'), venue.get('state'), venue.get('address'), venue.get('phone'), venue.get('seeking_talent_description'), venue.get('website'), venue.get('image_link'), venue.get('facebook_link'))
+    """ % (venue.get('id'), venue.get('name'), ','.join(venue.get('genres')), venue.get('city'), venue.get('state'), venue.get('address'), venue.get('phone'), venue.get('seeking_description'), venue.get('website'), venue.get('image_link'), venue.get('facebook_link'))
     cursor.execute(cmd)
 
 connection.commit()

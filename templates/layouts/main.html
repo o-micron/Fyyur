@@ -123,22 +123,22 @@
           <div class="modal-body">
             <form>
               <div class="form-group">
-                <input type="text" class="form-control" id="create-artist-modal-name" placeholder="Name">
+                <input type="text" class="form-control" id="create-artist-modal-name" name="name" placeholder="Name">
               </div>
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <input type="text" class="form-control" id="create-artist-modal-city" placeholder="City">
+                  <input type="text" class="form-control" id="create-artist-modal-city" name="city" placeholder="City">
                 </div>
                 <div class="form-group col-md-6">
-                  <input type="text" class="form-control" id="create-artist-modal-state" placeholder="State">
+                  <input type="text" class="form-control" id="create-artist-modal-state" name="state" placeholder="State">
                 </div>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" id="create-artist-modal-phone" placeholder="Phone">
+                <input type="text" class="form-control" id="create-artist-modal-phone" name="phone" placeholder="Phone">
               </div>
               <div class="form-group">
                 <small class="text-warning">Ctrl+Click to select multiple</small>
-                <select multiple class="form-control" id="create-artist-modal-genres">
+                <select multiple class="form-control" id="create-artist-modal-genres" name="genres">
                   <option>Rock</option>
                   <option>Alternative</option>
                   <option>Pop</option>
@@ -147,7 +147,7 @@
                 </select>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" id="create-artist-modal-facebookLink" placeholder="Facebook Link">
+                <input type="text" class="form-control" id="create-artist-modal-facebookLink" name="facebook_link" placeholder="Facebook Link">
               </div>
             </form>
           </div>
@@ -172,22 +172,22 @@
           <div class="modal-body">
             <form>
               <div class="form-group">
-                <input type="text" class="form-control" id="create-venue-modal-name" placeholder="Name">
+                <input type="text" class="form-control" id="create-venue-modal-name" name="name" placeholder="Name">
               </div>
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <input type="text" class="form-control" id="create-venue-modal-city" placeholder="City">
+                  <input type="text" class="form-control" id="create-venue-modal-city" name="city" placeholder="City">
                 </div>
                 <div class="form-group col-md-6">
-                  <input type="text" class="form-control" id="create-venue-modal-state" placeholder="State">
+                  <input type="text" class="form-control" id="create-venue-modal-state" name="state" placeholder="State">
                 </div>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" id="create-venue-modal-phone" placeholder="Phone">
+                <input type="text" class="form-control" id="create-venue-modal-phone" name="phone" placeholder="Phone">
               </div>
               <div class="form-group">
                 <small class="text-warning">Ctrl+Click to select multiple</small>
-                <select multiple class="form-control" id="create-venue-modal-genres">
+                <select multiple class="form-control" id="create-venue-modal-genres" name="genres">
                   <option>Rock</option>
                   <option>Alternative</option>
                   <option>Pop</option>
@@ -196,7 +196,7 @@
                 </select>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" id="create-venue-modal-facebookLink" placeholder="Facebook Link">
+                <input type="text" class="form-control" id="create-venue-modal-facebookLink" name="facebook_link" placeholder="Facebook Link">
               </div>
             </form>
           </div>
@@ -222,14 +222,14 @@
             <form>
               <div class="form-group">
                 <small class="text-warning"><strong>Artist ID</strong> can be found on the artist's page</small>
-                <input type="text" class="form-control" id="create-show-modal-artist-id" placeholder="Artist ID">
+                <input type="text" class="form-control" id="create-show-modal-artist-id" name="artist_id" placeholder="Artist ID">
               </div>
               <div class="form-group">
                 <small class="text-warning"><strong>Venue ID</strong> can be found on the venue's page</small>
-                <input type="text" class="form-control" id="create-show-modal-venue-id" placeholder="Venue ID">
+                <input type="text" class="form-control" id="create-show-modal-venue-id" name="venue_id" placeholder="Venue ID">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" id="create-show-modal-start_time" placeholder="Date of the show .. YYYY-MM-DD HH:MM:SS">
+                <input type="text" class="form-control" id="create-show-modal-start_time" name="start_time" placeholder="Date of the show .. YYYY-MM-DD HH:MM:SS">
               </div>
             </form>
           </div>
@@ -252,33 +252,33 @@
     {% if USE_CUSTOM_NAV %}
     {% else %}
     <script>
-      $('#create-artist-modal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-        var recipient = button.data('whatever') // Extract info from data-* attributes
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-        var modal = $(this)
-        modal.find('.modal-title').text('List a new artist')
-        // modal.find('.modal-body input').val(recipient)
-      })
-      $('#create-venue-modal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-        var recipient = button.data('whatever') // Extract info from data-* attributes
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-        var modal = $(this)
-        modal.find('.modal-title').text('List a new venue')
-        // modal.find('.modal-body input').val(recipient)
-      })
-      $('#create-show-modal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-        var recipient = button.data('whatever') // Extract info from data-* attributes
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-        var modal = $(this)
-        modal.find('.modal-title').text('List a new show')
-        // modal.find('.modal-body input').val(recipient)
-      })
+      // $('#create-artist-modal').on('show.bs.modal', function (event) {
+      //   var button = $(event.relatedTarget) // Button that triggered the modal
+      //   var recipient = button.data('whatever') // Extract info from data-* attributes
+      //   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+      //   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+      //   // var modal = $(this)
+      //   // modal.find('.modal-title').text('List a new artist')
+      //   // modal.find('.modal-body input').val(recipient)
+      // })
+      // $('#create-venue-modal').on('show.bs.modal', function (event) {
+      //   var button = $(event.relatedTarget) // Button that triggered the modal
+      //   var recipient = button.data('whatever') // Extract info from data-* attributes
+      //   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+      //   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+      //   var modal = $(this)
+      //   modal.find('.modal-title').text('List a new venue')
+      //   // modal.find('.modal-body input').val(recipient)
+      // })
+      // $('#create-show-modal').on('show.bs.modal', function (event) {
+      //   var button = $(event.relatedTarget) // Button that triggered the modal
+      //   var recipient = button.data('whatever') // Extract info from data-* attributes
+      //   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+      //   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+      //   var modal = $(this)
+      //   modal.find('.modal-title').text('List a new show')
+      //   // modal.find('.modal-body input').val(recipient)
+      // })
 
       function createArtist() {
         console.log("Creating artist with " + "name: " + $("#create-artist-modal-name").val() + "\n"
@@ -287,6 +287,20 @@
         + "phone: " + $("#create-artist-modal-phone").val() + "\n"
         + "genres: " + $("#create-artist-modal-genres").val() + "\n"
         + "facebook link: " + $("#create-artist-modal-facebookLink").val() + "\n");
+        fetch('/artists/create', {
+          method: 'POST',
+          body: JSON.stringify({
+            'name': $("#create-artist-modal-name").val(),
+            'city': $("#create-artist-modal-city").val(),
+            'state': $("#create-artist-modal-state").val(),
+            'phone': $("#create-artist-modal-phone").val(),
+            'genres': $("#create-artist-modal-genres").val(),
+            'facebook_link': $("#create-artist-modal-facebookLink").val()
+          }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
       }
 
       function createVenue() {
@@ -296,12 +310,37 @@
         + "phone: " + $("#create-venue-modal-phone").val() + "\n"
         + "genres: " + $("#create-venue-modal-genres").val() + "\n"
         + "facebook link: " + $("#create-venue-modal-facebookLink").val() + "\n");
+        fetch('/venues/create', {
+          method: 'POST',
+          body: JSON.stringify({
+            'name': $("#create-venue-modal-name").val(),
+            'city': $("#create-venue-modal-city").val(),
+            'state': $("#create-venue-modal-state").val(),
+            'phone': $("#create-venue-modal-phone").val(),
+            'genres': $("#create-venue-modal-genres").val(),
+            'facebook_link': $("#create-venue-modal-facebookLink").val()
+          }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
       }
 
       function createShow() {
         console.log("Creating show with " + "artist id: " + $("#create-show-modal-artist-id").val() + "\n"
         + "venue id: " + $("#create-show-modal-venue-id").val() + "\n"
         + "start time: " + $("#create-show-modal-start_time").val() + "\n");
+        fetch('/shows/create', {
+          method: 'POST',
+          body: JSON.stringify({
+            'artist_id': $("#create-show-modal-artist-id").val(),
+            'venue_id': $("#create-show-modal-venue-id").val(),
+            'start_time': $("#create-show-modal-start_time").val(),
+          }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
       }
     </script>
     {% endif %}

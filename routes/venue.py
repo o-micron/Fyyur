@@ -1,15 +1,29 @@
-from flask import render_template
-from models.shared import db
+import json
+from flask import render_template, url_for, redirect, request
 from models.Venue import Venue
+from models.shared import db
 
 
 class VenueRouter:
-    def all():
+    def view_all():
         return render_template('venues.html', data={
             'venues': Venue.query.all()
         })
 
-    def detail(venue_id):
+    def view_detail(venue_id):
         return render_template('venue.html', data={
             'venue': Venue.query.get(venue_id)
         })
+
+    def create():
+        data = json.loads(request.data)
+        name = data['name']
+        city = data['city']
+        state = data['state']
+        phone = data['phone']
+        genres = ','.join(data['genres'])
+        facebook_link = data['facebook_link']
+        venue = Venue(name=name, city=city, state=state, phone=phone, genres=genres, facebook_link=facebook_link)
+        db.session.add(venue)
+        db.session.commit()
+        return redirect(url_for('view_all_venues'))

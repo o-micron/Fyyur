@@ -58,31 +58,42 @@ def intex():
 
 
 @app.route('/artists')
-def artists():
-    return ArtistRouter.all()
+def view_all_artists():
+    return ArtistRouter.view_all()
 
 
 @app.route('/artists/<artist_id>')
-def artist(artist_id):
-    return ArtistRouter.detail(artist_id)
+def view_artist(artist_id):
+    return ArtistRouter.view_detail(artist_id)
+
+@app.route('/artists/create', methods=['POST'])
+def create_artist():
+    return ArtistRouter.create()
 
 
 @app.route('/shows')
-def shows():
-    return ShowRouter.all()
+def view_all_shows():
+    return ShowRouter.view_all()
 
 
 @app.route('/shows/<show_id>')
-def show(show_id):
-    return ShowRouter.detail(show_id)
+def view_show(show_id):
+    return ShowRouter.view_detail(show_id)
 
+@app.route('/shows/create', methods=['POST'])
+def create_show():
+    return ShowRouter.create()
 
 @app.route('/venues')
-def venues():
-    return VenueRouter.all()
+def view_all_venues():
+    return VenueRouter.view_all()
 
 
 @app.route('/venues/<venue_id>')
-def venue(venue_id):
-    return VenueRouter.detail(venue_id)
+def view_venue(venue_id):
+    return VenueRouter.view_detail(venue_id)
+
+@app.route('/venues/create', methods=['POST'])
+def create_venue():
+    return VenueRouter.create()
 ## -----------------------------------------------------------------------------------------------

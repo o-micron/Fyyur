@@ -123,22 +123,22 @@
           <div class="modal-body">
             <form>
               <div class="form-group">
-                <input type="text" class="form-control" id="name" placeholder="Name">
+                <input type="text" class="form-control" id="create-artist-modal-name" placeholder="Name">
               </div>
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <input type="text" class="form-control" id="city" placeholder="City">
+                  <input type="text" class="form-control" id="create-artist-modal-city" placeholder="City">
                 </div>
                 <div class="form-group col-md-6">
-                  <input type="text" class="form-control" id="state" placeholder="State">
+                  <input type="text" class="form-control" id="create-artist-modal-state" placeholder="State">
                 </div>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" id="phone" placeholder="Phone">
+                <input type="text" class="form-control" id="create-artist-modal-phone" placeholder="Phone">
               </div>
               <div class="form-group">
                 <small class="text-warning">Ctrl+Click to select multiple</small>
-                <select multiple class="form-control" id="genres">
+                <select multiple class="form-control" id="create-artist-modal-genres">
                   <option>Rock</option>
                   <option>Alternative</option>
                   <option>Pop</option>
@@ -147,13 +147,13 @@
                 </select>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" id="facebookLink" placeholder="Facebook Link">
+                <input type="text" class="form-control" id="create-artist-modal-facebookLink" placeholder="Facebook Link">
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Create</button>
+            <button type="button" class="btn btn-primary" onclick="createArtist()">Create</button>
           </div>
         </div>
       </div>
@@ -172,22 +172,22 @@
           <div class="modal-body">
             <form>
               <div class="form-group">
-                <input type="text" class="form-control" id="name" placeholder="Name">
+                <input type="text" class="form-control" id="create-venue-modal-name" placeholder="Name">
               </div>
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <input type="text" class="form-control" id="city" placeholder="City">
+                  <input type="text" class="form-control" id="create-venue-modal-city" placeholder="City">
                 </div>
                 <div class="form-group col-md-6">
-                  <input type="text" class="form-control" id="state" placeholder="State">
+                  <input type="text" class="form-control" id="create-venue-modal-state" placeholder="State">
                 </div>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" id="phone" placeholder="Phone">
+                <input type="text" class="form-control" id="create-venue-modal-phone" placeholder="Phone">
               </div>
               <div class="form-group">
                 <small class="text-warning">Ctrl+Click to select multiple</small>
-                <select multiple class="form-control" id="genres">
+                <select multiple class="form-control" id="create-venue-modal-genres">
                   <option>Rock</option>
                   <option>Alternative</option>
                   <option>Pop</option>
@@ -196,13 +196,13 @@
                 </select>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" id="facebookLink" placeholder="Facebook Link">
+                <input type="text" class="form-control" id="create-venue-modal-facebookLink" placeholder="Facebook Link">
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Create</button>
+            <button type="button" class="btn btn-primary" onclick="createVenue()">Create</button>
           </div>
         </div>
       </div>
@@ -222,20 +222,20 @@
             <form>
               <div class="form-group">
                 <small class="text-warning"><strong>Artist ID</strong> can be found on the artist's page</small>
-                <input type="text" class="form-control" id="artist_id" placeholder="Artist ID">
+                <input type="text" class="form-control" id="create-show-modal-artist-id" placeholder="Artist ID">
               </div>
               <div class="form-group">
                 <small class="text-warning"><strong>Venue ID</strong> can be found on the venue's page</small>
-                <input type="text" class="form-control" id="venue_id" placeholder="Venue ID">
+                <input type="text" class="form-control" id="create-show-modal-venue-id" placeholder="Venue ID">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" id="start_time" placeholder="Date of the show .. YYYY-MM-DD HH:MM:SS">
+                <input type="text" class="form-control" id="create-show-modal-start_time" placeholder="Date of the show .. YYYY-MM-DD HH:MM:SS">
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Create</button>
+            <button type="button" class="btn btn-primary" onclick="createShow()">Create</button>
           </div>
         </div>
       </div>
@@ -279,6 +279,30 @@
         modal.find('.modal-title').text('List a new show')
         // modal.find('.modal-body input').val(recipient)
       })
+
+      function createArtist() {
+        console.log("Creating artist with " + "name: " + $("#create-artist-modal-name").val() + "\n"
+        + "city: " + $("#create-artist-modal-city").val() + "\n"
+        + "state: " + $("#create-artist-modal-state").val() + "\n"
+        + "phone: " + $("#create-artist-modal-phone").val() + "\n"
+        + "genres: " + $("#create-artist-modal-genres").val() + "\n"
+        + "facebook link: " + $("#create-artist-modal-facebookLink").val() + "\n");
+      }
+
+      function createVenue() {
+        console.log("Creating venue with " + "name: " + $("#create-venue-modal-name").val() + "\n"
+        + "city: " + $("#create-venue-modal-city").val() + "\n"
+        + "state: " + $("#create-venue-modal-state").val() + "\n"
+        + "phone: " + $("#create-venue-modal-phone").val() + "\n"
+        + "genres: " + $("#create-venue-modal-genres").val() + "\n"
+        + "facebook link: " + $("#create-venue-modal-facebookLink").val() + "\n");
+      }
+
+      function createShow() {
+        console.log("Creating show with " + "artist id: " + $("#create-show-modal-artist-id").val() + "\n"
+        + "venue id: " + $("#create-show-modal-venue-id").val() + "\n"
+        + "start time: " + $("#create-show-modal-start_time").val() + "\n");
+      }
     </script>
     {% endif %}
     {% block scripts %}{% endblock %}

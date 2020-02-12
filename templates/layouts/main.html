@@ -12,6 +12,7 @@
     <!-- Fonts -->
     <link href="../static/fontawesome/css/fontawesome.min.css" rel="stylesheet" />
     <link href="../static/fontawesome/css/solid.min.css" rel="stylesheet" />
+    <link href="../static/fontawesome/css/brands.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Gothic+A1&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Aladin&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet">
@@ -32,7 +33,7 @@
         max-width: 1000px;
         padding: 15px;
         margin: auto;
-        margin-top: 1%;
+        margin-top: 0.5%;
         text-align: center;
       }
       .completed-task {
@@ -342,6 +343,9 @@
           }
         });
       }
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
     </script>
     {% endif %}
     {% block scripts %}{% endblock %}

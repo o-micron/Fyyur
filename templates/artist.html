@@ -1,81 +1,122 @@
 {% set navlinks = [ { 'name': 'Venues', 'class': '', 'link': '/venues'}, {
 'name': 'Artists', 'class': '', 'link': '/artists'}, { 'name': 'Shows', 'class':
-'', 'link': '/shows'} ] %}
-{% extends 'layouts/main.html' %}
-{% block title %}Artists{% endblock %}
-{% block content %}
+'', 'link': '/shows'} ] %} {% extends 'layouts/main.html' %} {% block title
+%}Artists{% endblock %} {% block styles %} {% endblock %} {% block content %}
 <div class="container">
-  <div class="row" style="margin-top: 50px;">
-    <div class="col-3">
-      <img
-        src="{{ data.artist.image_link }}"
-        alt="..."
-        class="card-img-top"
-        style="padding-bottom: 20px;"
-      />
-      <h4>{{ data.artist.name }}</h4>
-    </div>
-    <div class="col-9">
-      {% if data.artist.seeking_venue_description != "None" %}
-      <div class="card">
-        <div class="card-header">
-          Heads up !
+  <div style="margin-top: 1%;">
+    <div class="row">
+      <div class="col-3">
+        <img
+          src="{{ data.artist.image_link }}"
+          alt="..."
+          class="card-img-top"
+          style="padding-bottom: 20px;"
+        />
+        <h4>{{ data.artist.name }}</h4>
+        <div type="button" class="btn btn-warning btn-sm">
+          ID <span class="badge badge-light">{{ data.artist.id }}</span>
+          <span class="sr-only">unread messages</span>
         </div>
-        <div class="card-body">
-          <h5 class="card-title">We're Currently seeking performance venues</h5>
-          <p class="card-text">{{ data.artist.seeking_venue_description }}</p>
-          <a href="#" class="btn btn-primary">Help us</a>
+        <div class="">
+          {% for genre in data.artist.genres.split(',') %}
+          <a href="#" class="badge badge-dark">{{ genre }}</a>
+          {% endfor %}
         </div>
-      </div>
+        <div class="">
+          <span class="text-danger" style="font-size: 1.4rem;">
+            <i class="fas fa-map-marker-alt"></i>
+          </span>
+          {{ data.artist.city }}, {{ data.artist.state }}
+        </div>
+        <div>
+          <span class="text-dark" style="font-size: 1.4rem;">
+            <i class="fas fa-phone-alt"></i>
+          </span>
+          {{ data.artist.phone }}
+        </div>
+        <div>
+          <span class="text-primary" style="font-size: 1.4rem;">
+            <i class="fas fa-link"></i>
+          </span>
+          <a href="{{ data.artist.website[:25] }}"
+            >{{ data.artist.website[:25] }}</a
+          >
+        </div>
+        <div>
+          <span class="text-primary" style="font-size: 1.4rem;">
+            <i class="fab fa-facebook-square"></i>
+          </span>
+          <a href="{{ data.artist.facebook_link[:25] }}"
+            >{{ data.artist.facebook_link[:25] }}</a
+          >
+        </div>
+        {% if data.artist.seeking_venue_description != "None" %}
+        <a
+          href="#"
+          class="text-danger"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="{{ data.artist.seeking_venue_description }}"
+        >
+          seeking performance venues <i class="fas fa-exclamation-circle"></i>
+        </a>
         {% endif %}
-        <h3>Past Shows</h3>
-        <div class="overflow-auto" style="background-color: teal; padding-top: 20px; padding-bottom: 40px">
-        <div class="container-fluid">
-          <h2>Bootstrap Horizontal Scrolling with Flexbox</h2>
-          <div class="row flex-row flex-nowrap">
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-              <div class="card card-block">Card</div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-              <div class="card card-block">Card</div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-              <div class="card card-block">Card</div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-              <div class="card card-block">Card</div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-              <div class="card card-block">Card</div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-              <div class="card card-block">Card</div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-              <div class="card card-block">Card</div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-              <div class="card card-block">Card</div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-              <div class="card card-block">Card</div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-              <div class="card card-block">Card</div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-              <div class="card card-block">Card</div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-              <div class="card card-block">Card</div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-              <div class="card card-block">Card</div>
+      </div>
+      <div class="col-9">
+        <h3>Upcoming Shows</h3>
+        <div
+          class="overflow-auto"
+          style="padding-top: 20px; padding-bottom: 40px; margin-bottom: 15px;"
+        >
+          <div class="container-fluid">
+            <div class="row flex-row flex-nowrap">
+              {% for show in data.shows %}
+              {% if show.start_time|is_date_in_the_future() %}
+              <div class="col-5">
+                <div class="card card-block">
+                  <img src="{{ show.venue.image_link }}" class="card-img-top" alt="..." />
+                  <div class="card-body">
+                    <a href="/venues/{{ show.venue.id }}" class="card-title">{{ show.venue.name }}</a>
+                    <p class="card-text">
+                      {{ show.start_time.strftime('%A %b %-d %Y at %-I:%M%p') }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+              {% endfor %}
             </div>
           </div>
         </div>
+
+        <h3>Past Shows</h3>
+        <div
+          class="overflow-auto"
+          style="padding-top: 20px; padding-bottom: 40px; margin-bottom: 15px;"
+        >
+          <div class="container-fluid">
+            <div class="row flex-row flex-nowrap">
+              {% for show in data.shows %}
+              {% if show.start_time|is_date_in_the_past() %}
+              <div class="col-5">
+                <div class="card card-block">
+                  <img src="{{ show.venue.image_link }}" class="card-img-top" alt="..." />
+                  <div class="card-body">
+                    <a href="/venues/{{ show.venue.id }}" class="card-title">{{ show.venue.name }}</a>
+                    <p class="card-text">
+                      {{ show.start_time.strftime('%A %b %-d %Y at %-I:%M%p') }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        
       </div>
     </div>
   </div>
-  {% endblock %}
 </div>
+{% endblock %}

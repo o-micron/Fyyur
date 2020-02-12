@@ -1,6 +1,7 @@
 import json
 from flask import render_template, url_for, redirect, request
 from models.Artist import Artist
+from models.Show import Show
 from models.shared import db
 
 
@@ -12,7 +13,8 @@ class ArtistRouter:
 
     def view_detail(artist_id):
         return render_template('artist.html', data={
-            'artist': Artist.query.get(artist_id)
+            'artist': Artist.query.get(artist_id),
+            'shows': Show.query.filter(Show.artist_id == artist_id)
         })
 
     def create():

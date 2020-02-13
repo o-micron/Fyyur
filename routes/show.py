@@ -1,3 +1,4 @@
+from datetime import datetime
 import json
 from flask import render_template, url_for, redirect, request
 from models.Show import Show
@@ -18,7 +19,7 @@ class ShowRouter:
         data = json.loads(request.data)
         artist_id = data['artist_id']
         venue_id = data['venue_id']
-        start_time = data['start_time']
+        start_time = datetime.strptime(data['start_time'], "%Y-%m-%d %H:%M:%S")
         show = Show(artist_id=artist_id, venue_id=venue_id, start_time=start_time)
         db.session.add(show)
         db.session.commit()

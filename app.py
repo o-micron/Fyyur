@@ -27,8 +27,9 @@ with app.app_context():
 ## -----------------------------------------------------------------------------------------------
 ## Filters
 ## -----------------------------------------------------------------------------------------------
-app.jinja_env.filters['is_date_in_the_past'] = lambda d: datetime(d.year, d.month, d.day) < datetime.now()
-app.jinja_env.filters['is_date_in_the_future'] = lambda d: datetime(d.year, d.month, d.day) > datetime.now()
+app.jinja_env.filters['date_now'] = lambda _: datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+app.jinja_env.filters['is_date_in_the_past'] = lambda d: d < datetime.now()
+app.jinja_env.filters['is_date_in_the_future'] = lambda d: d > datetime.now()
 ## -----------------------------------------------------------------------------------------------
 
 

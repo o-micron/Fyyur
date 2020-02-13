@@ -1,11 +1,155 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Venue</title>
-  </head>
-  <body>
-    <h2>Welcome to {{ data.venue.name }}'s official page</h2>
-  </body>
-</html>
+{% set navlinks = [ { 'name': 'Venues', 'class': '', 'link': '/venues'}, {
+  'name': 'Artists', 'class': '', 'link': '/artists'}, { 'name': 'Shows', 'class':
+  '', 'link': '/shows'} ] %}
+  {% extends 'layouts/main.html' %}
+  {% block title %}{{ data.venue.name }}{% endblock %}
+  {% block styles %} {% endblock %}
+  {% block content %}
+  <div class="container">
+    <div style="margin-top: 1%;">
+      <div class="row">
+        <div class="col-3">
+          <img
+            src="{{ data.venue.image_link }}"
+            alt="..."
+            class="card-img-top"
+            style="padding-bottom: 20px;"
+          />
+          <h4>{{ data.venue.name }}</h4>
+          <div type="button" class="btn btn-warning btn-sm">
+            ID <span class="badge badge-light">{{ data.venue.id }}</span>
+            <span class="sr-only">unread messages</span>
+          </div>
+          <div class="">
+            {% for genre in data.venue.genres.split(',') %}
+            <a href="#" class="badge badge-dark">{{ genre }}</a>
+            {% endfor %}
+          </div>
+          <div class="">
+            <span class="text-danger" style="font-size: 1.4rem;">
+              <i class="fas fa-map-marker-alt"></i>
+            </span>
+            {{ data.venue.city }}, {{ data.venue.state }}
+          </div>
+          {% if data.venue.phone != "None" %}
+          <div>
+            <span class="text-dark" style="font-size: 1.4rem;">
+              <i class="fas fa-phone-alt"></i>
+            </span>
+            {{ data.venue.phone }}
+          </div>
+          {% endif %}
+          {% if data.venue.website != "None" %}
+          <div>
+            <span class="text-primary" style="font-size: 1.4rem;">
+              <i class="fas fa-link"></i>
+            </span>
+            <a href="{{ data.venue.website }}">{{ data.venue.website[:25] }}</a>
+          </div>
+          {% endif %}
+          {% if data.venue.facebook_link != "None" %}
+          <div>
+            <span class="text-primary" style="font-size: 1.4rem;">
+              <i class="fab fa-facebook-square"></i>
+            </span>
+            <a href="{{ data.venue.facebook_link }}"
+              >{{ data.venue.facebook_link[:25] }}</a
+            >
+          </div>
+          {% endif %}
+          {% if data.venue.seeking_talent_description != "None" %}
+          <a
+            href="#"
+            class="text-danger"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="{{ data.venue.seeking_talent_description }}"
+          >
+            seeking talent <i class="fas fa-exclamation-circle"></i>
+          </a>
+          {% endif %}
+        </div>
+        <div class="col-9">
+          <h3>Upcoming Shows</h3>
+          <div
+            class="overflow-auto"
+            style="padding-top: 20px; padding-bottom: 40px; margin-bottom: 15px;"
+          >
+            <div class="container-fluid">
+              <div class="row flex-row flex-nowrap">
+                {% set upcoming_shows_count = [] %}
+                {% for show in data.shows %}
+                {% if show.start_time|is_date_in_the_future() %}
+                {% if upcoming_shows_count.append(1) %}{% endif %}
+                <div class="col-5">
+                  <div class="card card-block">
+                    <img
+                      src="{{ show.artist.image_link }}"
+                      class="card-img-top"
+                      alt="..."
+                    />
+                    <div class="card-body">
+                      <a href="/artists/{{ show.artist.id }}" class="card-title"
+                        >{{ show.artist.name }}</a
+                      >
+                      <p class="card-text">
+                        {{ show.start_time.strftime('%A %b %-d %Y at %-I:%M%p') }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% if upcoming_shows_count|length == 0 %}
+                <div class="container">
+                  <small>There are currently no upcoming shows to display</small>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+  
+          <h3>Past Shows</h3>
+          <div
+            class="overflow-auto"
+            style="padding-top: 20px; padding-bottom: 40px; margin-bottom: 15px;"
+          >
+            <div class="container-fluid">
+              <div class="row flex-row flex-nowrap">
+                {% set past_shows_count = [] %}
+                {% for show in data.shows %}
+                {% if show.start_time|is_date_in_the_past() %}
+                {% if past_shows_count.append(1) %}{% endif %}
+                <div class="col-5">
+                  <div class="card card-block">
+                    <img
+                      src="{{ show.artist.image_link }}"
+                      class="card-img-top"
+                      alt="..."
+                    />
+                    <div class="card-body">
+                      <a href="/artists/{{ show.artist.id }}" class="card-title"
+                        >{{ show.artist.name }}</a
+                      >
+                      <p class="card-text">
+                        {{ show.start_time.strftime('%A %b %-d %Y at %-I:%M%p') }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% if past_shows_count|length == 0 %}
+                <div class="container">
+                  <small>There are currently no past shows to display</small>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+  

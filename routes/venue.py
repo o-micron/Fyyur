@@ -1,6 +1,7 @@
 import json
 from flask import render_template, url_for, redirect, request
 from models.Venue import Venue
+from models.Show import Show
 from models.shared import db
 
 
@@ -12,7 +13,8 @@ class VenueRouter:
 
     def view_detail(venue_id):
         return render_template('venue.html', data={
-            'venue': Venue.query.get(venue_id)
+            'venue': Venue.query.get(venue_id),
+            'shows': Show.query.filter(Show.venue_id == venue_id)
         })
 
     def create():

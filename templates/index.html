@@ -1,9 +1,74 @@
-{% set navlinks = [
-  { 'name': 'Venues', 'class': '', 'link': '/venues'},
-  { 'name': 'Artists', 'class': '', 'link': '/artists'},
-  { 'name': 'Shows', 'class': '', 'link': '/shows'}
-]%}
-{% extends 'layouts/main.html' %}
-{% block title %}Fyyur{% endblock %}
-{% block content %}
+{% set navlinks = [ { 'name': 'Venues', 'class': '', 'link': '/venues'}, {
+'name': 'Artists', 'class': '', 'link': '/artists'}, { 'name': 'Shows', 'class':
+'', 'link': '/shows'} ]%} {% extends 'layouts/main.html' %} {% block title
+%}Fyyur{% endblock %} {% block content %}
+<div style="padding-left: 5%; margin-top: 100px;">
+  <div class="row">
+    <div class="col-6">
+      <div>
+        <h1>Fyyur</h1>
+        <h6>
+          Where musical
+          <a
+            href="/artists"
+            class="text-warning"
+            style="font-weight: bolder; font-size: xx-large;"
+            >artists</a
+          >
+          meet musical
+          <a
+            href="/venues"
+            class="text-primary"
+            style="font-weight: bolder; font-size: xx-large;"
+            >venues</a
+          >
+        </h6>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="row">
+            <!-- Find -->
+            <div class="col-6">
+              <button class="btn btn-warning" style="margin: 5px;">
+                Find an artist
+              </button>
+            </div>
+            <div class="col-6">
+              <button class="btn btn-primary" style="margin: 5px;">
+                Find a venue
+              </button>
+            </div>
+          </div>
+          <div class="row">
+            <!-- Post -->
+            <div class="col-6">
+              <button class="btn btn-warning" style="margin: 5px;">
+                Post an artist
+              </button>
+            </div>
+            <div class="col-6">
+              <button class="btn btn-primary" style="margin: 5px;">
+                Post a venue
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-6"></div>
+      </div>
+      <div class="text-info" style="margin-top: 70px;">
+        <h6>Publicize about your show for free</h6>
+        <button class="btn btn-info" style="margin: 5px;">
+          Post a show
+        </button>
+      </div>
+    </div>
+    <div class="col-6" style="padding-right: 5%;">
+      <img
+        src="/static/img/front-splash.jpg"
+        class="img-fluid"
+        alt="Responsive image"
+      />
+    </div>
+  </div>
+</div>
 {% endblock %}

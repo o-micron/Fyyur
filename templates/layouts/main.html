@@ -301,6 +301,10 @@
           headers: {
             'Content-Type': 'application/json'
           }
+        }).then(response => {
+          console.log("OK: " + response);
+        }).catch(err => {
+          console.log("ERROR: " + err);
         });
       }
 
@@ -324,7 +328,11 @@
           headers: {
             'Content-Type': 'application/json'
           }
-        });
+        }).then(response => {
+          console.log("OK: " + response);
+        }).catch(err => {
+          console.log("ERROR: " + err);
+        });;
       }
 
       function createShow() {
@@ -341,7 +349,11 @@
           headers: {
             'Content-Type': 'application/json'
           }
-        });
+        }).then(response => {
+          console.log("OK: " + response);
+        }).catch(err => {
+          console.log("ERROR: " + err);
+        });;
       }
       $(function () {
         $('[data-toggle="tooltip"]').tooltip()

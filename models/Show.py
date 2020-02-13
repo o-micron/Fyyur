@@ -9,6 +9,10 @@ class Show(db.Model):
     artist_id = db.Column(db.Integer, db.ForeignKey('artists.id'), nullable=False)
     venue_id = db.Column(db.Integer, db.ForeignKey('venues.id'), nullable=False)
 
+    __table_args__ = (
+        db.UniqueConstraint(start_time, artist_id, venue_id),
+    )
+    
     def __repr__(self):
         return f'''
         <Show id: {self.id},

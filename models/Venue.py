@@ -6,7 +6,7 @@ class Venue(db.Model):
     __tablename__ = 'venues'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(40), nullable=False)
+    name = db.Column(db.String(40), nullable=False, unique=True)
     genres = db.Column(db.String(150), nullable=False)
     city = db.Column(db.String(120), nullable=False)
     state = db.Column(db.String(120), nullable=False)

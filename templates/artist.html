@@ -28,28 +28,34 @@
           </span>
           {{ data.artist.city }}, {{ data.artist.state }}
         </div>
+        {% if data.artist.phone != "None" %}
         <div>
           <span class="text-dark" style="font-size: 1.4rem;">
             <i class="fas fa-phone-alt"></i>
           </span>
           {{ data.artist.phone }}
         </div>
+        {% endif %}
+        {% if data.artist.website != "None" %}
         <div>
           <span class="text-primary" style="font-size: 1.4rem;">
             <i class="fas fa-link"></i>
           </span>
-          <a href="{{ data.artist.website[:25] }}"
+          <a href="{{ data.artist.website }}"
             >{{ data.artist.website[:25] }}</a
           >
         </div>
+        {% endif %}
+        {% if data.artist.facebook_link != "None" %}
         <div>
           <span class="text-primary" style="font-size: 1.4rem;">
             <i class="fab fa-facebook-square"></i>
           </span>
-          <a href="{{ data.artist.facebook_link[:25] }}"
+          <a href="{{ data.artist.facebook_link }}"
             >{{ data.artist.facebook_link[:25] }}</a
           >
         </div>
+        {% endif %}
         {% if data.artist.seeking_venue_description != "None" %}
         <a
           href="#"
@@ -70,8 +76,10 @@
         >
           <div class="container-fluid">
             <div class="row flex-row flex-nowrap">
+              {% set upcoming_shows_count = [] %}
               {% for show in data.shows %}
               {% if show.start_time|is_date_in_the_future() %}
+              {% if upcoming_shows_count.append(1) %}{% endif %}
               <div class="col-5">
                 <div class="card card-block">
                   <img src="{{ show.venue.image_link }}" class="card-img-top" alt="..." />
@@ -85,6 +93,11 @@
               </div>
               {% endif %}
               {% endfor %}
+              {% if upcoming_shows_count|length == 0 %}
+              <div class="container">
+                <small>There are currently no upcoming shows to display</small>
+              </div>
+              {% endif %}
             </div>
           </div>
         </div>
@@ -96,8 +109,10 @@
         >
           <div class="container-fluid">
             <div class="row flex-row flex-nowrap">
+              {% set past_shows_count = [] %}
               {% for show in data.shows %}
               {% if show.start_time|is_date_in_the_past() %}
+              {% if past_shows_count.append(1) %}{% endif %}
               <div class="col-5">
                 <div class="card card-block">
                   <img src="{{ show.venue.image_link }}" class="card-img-top" alt="..." />
@@ -111,6 +126,11 @@
               </div>
               {% endif %}
               {% endfor %}
+              {% if past_shows_count|length == 0 %}
+              <div class="container">
+                <small>There are currently no past shows to display</small>
+              </div>
+              {% endif %}
             </div>
           </div>
         </div>

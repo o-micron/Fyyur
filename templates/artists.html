@@ -5,12 +5,12 @@
 {% block title %}Artists{% endblock %} {% block content %}
 <div class="container">
   <div class="mid">
-    <form style="margin-top: 15px; margin-bottom: 50px;">
-      <div class="form-group">
-        <input type="search" class="form-control" style="outline: none !important; box-shadow: none;" id="searchText"  placeholder="Search">
+    <div style="margin-top: 15px; margin-bottom: 50px;">
+      <form action="/artists" method="POST" id="searchForm" class="form-group">
+        <input type="search" class="form-control" style="outline: none !important; box-shadow: none;" id="searchText" name="searchQuery" value="{{ data.searchQuery }}" placeholder="Search">
         <h5 class="text-info" style="margin-top: 10px;">{{ data.artists|length }} artists</h5>
-      </div>
-    </form>
+      </form>
+    </div>
     <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1">
       {% for artist in data.artists|sort(attribute='name') %}
       <div class="col mb-4">
@@ -30,4 +30,13 @@
     </div>
   </div>
 </div>
+{% endblock %}
+{% block scripts %}
+<script>
+  $("#searchText").on("keydown",function search(e) {
+      if(e.keyCode == 13) {
+          $("#searchForm").submit();
+      }
+  });
+</script>
 {% endblock %}

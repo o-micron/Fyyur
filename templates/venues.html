@@ -4,51 +4,11 @@
 {% extends 'layouts/main.html' %} 
 {% block title %}Venues{% endblock %}
 {% block content %}
-<!-- <div class="container">
-  <div class="row">
-    <div class="col-4">
-      <nav id="navbar-example3" class="navbar navbar-light bg-light" style="position: relative;">
-        <nav class="nav nav-pills flex-column">
-          <a class="nav-link" href="#item-1">Item 1</a>
-          <nav class="nav nav-pills flex-column">
-            <a class="nav-link ml-3 my-1" href="#item-1-1">Item 1-1</a>
-            <a class="nav-link ml-3 my-1" href="#item-1-2">Item 1-2</a>
-          </nav>
-          <a class="nav-link" href="#item-2">Item 2</a>
-          <a class="nav-link" href="#item-3">Item 3</a>
-          <nav class="nav nav-pills flex-column">
-            <a class="nav-link ml-3 my-1" href="#item-3-1">Item 3-1</a>
-            <a class="nav-link ml-3 my-1" href="#item-3-2">Item 3-2</a>
-          </nav>
-        </nav>
-      </nav>
-    </div>
-    <div class="col-8">
-      <div style="position: relative; height: 400px; overflow-y: scroll;" data-spy="scroll" data-target="#navbar-example3" data-offset="0">
-        <h4 id="item-1">Item 1</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-          Sed vulputate nisi vitae commodo scelerisque. 
-          Curabitur at neque ac nisi scelerisque placerat. 
-          Suspendisse vehicula, sapien nec hendrerit pellentesque, erat neque vehicula elit, luctus pretium erat quam vel diam. Quisque a dignissim lectus, ut pretium ex. Integer a porttitor diam. Morbi vel sem eget turpis condimentum tincidunt. Nullam sed eros a tortor pellentesque volutpat. Donec justo lacus, hendrerit at lorem sit amet, pulvinar bibendum ante. Cras eu sapien eu diam porta placerat. Nulla sed mollis nibh. Fusce pharetra mauris nec consectetur convallis. Ut laoreet risus id ante tincidunt, et tempus lectus pulvinar.</p>
-        <h5 id="item-1-1">Item 1-1</h5>
-        <h5 id="item-1-2">Item 1-2</h5>
-        <p>Nulla nec mollis nisi. Sed non maximus sapien. Pellentesque interdum sit amet sem id lacinia. Duis quam metus, suscipit venenatis viverra eu, luctus eget sem. Proin tempor porttitor nunc ut laoreet. Donec accumsan mi ac sagittis vestibulum. Curabitur orci est, molestie quis vehicula convallis, tincidunt et mi. In fringilla, nisl eu rhoncus ullamcorper, metus erat lobortis risus, et volutpat orci arcu ut dolor. Phasellus tempor, nisl id tempus viverra, sapien ex ultrices arcu, eu aliquam ipsum dui id diam. Morbi vitae mauris sed elit sagittis ullamcorper. Vivamus mi orci, pulvinar vel ultricies id, molestie ut nisi. Donec id magna finibus, dictum risus in, convallis felis. Duis hendrerit nulla nisi, eu eleifend dui sagittis in. Donec tristique sit amet erat in auctor. Phasellus in odio consequat, luctus orci convallis, ultricies lacus. Donec eu lorem nec tellus tempor facilisis.</p>
-        <h4 id="item-2">Item 2</h4>
-        <h4 id="item-3">Item 3</h4>
-        <p>Phasellus lorem est, consectetur tempus consequat in, consequat nec eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas et quam a leo scelerisque interdum in in quam. Sed ac lobortis augue. Aenean eget augue in magna aliquet ultrices sed vitae nibh. Donec at ante vitae enim consectetur suscipit. Cras augue nisl, varius non porttitor eu, aliquam at tellus. Donec sit amet venenatis magna. Cras luctus nunc a libero porta mollis. Aenean gravida, lectus at aliquam blandit, magna quam auctor lectus, a sollicitudin neque nunc in elit.</p>
-        <h5 id="item-3-1">Item 3-1</h5>
-        <h5 id="item-3-2">Item 3-2</h5>
-        <p>Proin tempus magna aliquet sapien imperdiet blandit. Vestibulum ut mollis augue. Nullam eu fermentum eros. Quisque lacinia dictum consectetur. Curabitur lacinia nisl quis nunc ultrices, vel tincidunt nibh volutpat. Donec a turpis et lacus consequat dictum eu eu tellus. Curabitur venenatis lectus at ligula pretium sodales. Aenean rhoncus, est vel porttitor elementum, augue quam convallis tellus, nec ornare mi nibh eget leo.</p>
-      </div>  
-    </div>
-  </div>
-</div> -->
-<!-- </div> -->
 <div class="container">
   <div class="mid">
-      <form style="margin-top: 15px; margin-bottom: 50px;">
+      <form action="/venues" method="POST" id="searchForm" style="margin-top: 15px; margin-bottom: 50px;">
         <div class="form-group">
-          <input type="search" class="form-control" style="outline: none !important; box-shadow: none;" id="searchText"  placeholder="Search">
+          <input type="search" class="form-control" style="outline: none !important; box-shadow: none;" id="searchText" name="searchQuery" value="{{ data.searchQuery }}" placeholder="Search">
           <h5 class="text-info" style="margin-top: 10px;">{{ data.venues|length }} venues</h5>
         </div>
       </form>
@@ -76,4 +36,11 @@
 {% endblock %}
 
 {% block scripts %}
+<script>
+  $("#searchText").on("keydown",function search(e) {
+      if(e.keyCode == 13) {
+          $("#searchForm").submit();
+      }
+  });
+</script>
 {% endblock %}

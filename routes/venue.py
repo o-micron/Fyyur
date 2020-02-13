@@ -7,9 +7,24 @@ from models.shared import db
 
 class VenueRouter:
     def view_all():
-        return render_template('venues.html', data={
-            'venues': Venue.query.all()
-        })
+        if request.method == 'POST':
+            searchQuery = request.form.get('searchQuery')
+            searchQuery = searchQuery.lstrip()
+            if searchQuery:
+                return render_template('venues.html', data={
+                    'venues': Venue.query.filter(Venue.name.like('%' + searchQuery + '%')).all(),
+                    'searchQuery': searchQuery
+                })
+            else:
+                return render_template('venues.html', data={
+                    'venues': Venue.query.all(),
+                    'searchQuery': ''
+                })
+        else:
+            return render_template('venues.html', data={
+                'venues': Venue.query.all(),
+                'searchQuery': ''
+            })
 
     def view_detail(venue_id):
         return render_template('venue.html', data={

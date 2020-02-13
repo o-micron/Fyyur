@@ -7,9 +7,24 @@ from models.shared import db
 
 class ArtistRouter:
     def view_all():
-        return render_template('artists.html', data={
-            'artists': Artist.query.all()
-        })
+        if request.method == 'POST':
+            searchQuery = request.form.get('searchQuery')
+            searchQuery = searchQuery.lstrip()
+            if searchQuery:
+                return render_template('artists.html', data={
+                    'artists': Artist.query.filter(Artist.name.like('%' + searchQuery + '%')).all(),
+                    'searchQuery': searchQuery
+                })
+            else:
+                return render_template('artists.html', data={
+                    'artists': Artist.query.all(),
+                    'searchQuery': ''
+                })
+        else:
+            return render_template('artists.html', data={
+                'artists': Artist.query.all(),
+                'searchQuery': ''
+            })
 
     def view_detail(artist_id):
         return render_template('artist.html', data={

@@ -50,7 +50,7 @@ def intex():
     return render_template('index.html')
 
 
-@app.route('/artists')
+@app.route('/artists', methods=['GET', 'POST'])
 def view_all_artists():
     return ArtistRouter.view_all()
 
@@ -77,7 +77,7 @@ def view_show(show_id):
 def create_show():
     return ShowRouter.create()
 
-@app.route('/venues')
+@app.route('/venues', methods=['GET', 'POST'])
 def view_all_venues():
     return VenueRouter.view_all()
 

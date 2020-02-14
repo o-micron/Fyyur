@@ -60,6 +60,43 @@
         height: 15vw;
         object-fit: cover;
       }
+      /* Sticky footer styles
+      -------------------------------------------------- */
+      html {
+        position: relative;
+        min-height: 100%;
+      }
+      body {
+        /* Margin bottom by footer height */
+        margin-bottom: 60px;
+      }
+      .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        /* Set the fixed height of the footer here */
+        height: 60px;
+        line-height: 60px; /* Vertically center the text there */
+        background-color: white;
+      }
+
+
+      /* Custom page CSS
+      -------------------------------------------------- */
+      /* Not required for template or sticky footer method. */
+
+      body > .container {
+        padding: 60px 15px 0;
+      }
+
+      .footer > .container {
+        padding-right: 15px;
+        padding-left: 15px;
+      }
+
+      code {
+        font-size: 80%;
+      }
     </style>
     {% block links %}{% endblock %}
     {% block styles %}{% endblock %}
@@ -71,7 +108,6 @@
     {% else %}
     <nav class="navbar sticky-top navbar-custom navbar-expand-sm">
       <form class="form-inline">
-        <div class="form-group mx-sm-3 mb-2">
           <a class="nav-link" href="/">
             <span style="font-size: 1.4rem;">
               <span class="custom-color">
@@ -84,32 +120,7 @@
               {{ navlink.name }}
             </a>
           {% endfor %}
-        </div>
       </form>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span style="font-size: 1.4rem;">
-          <span class="custom-color">
-            <i class="fas fa-bars"></i>
-          </span>
-        </span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="nav mr-auto">
-        </ul>
-        <form class="form-inline">
-          <div class="form-group mx-sm-3 mb-2">
-            <a class="nav-link custom-color" href="/artists/create">
-              Artist <i class="fas fa-plus-circle"></i>
-            </a>
-            <a class="nav-link custom-color" href="/venues/create">
-              Venue <i class="fas fa-plus-circle"></i>
-            </a>
-            <a class="nav-link custom-color" href="/shows/create">
-              Show <i class="fas fa-plus-circle"></i>
-            </a>
-          </div>
-        </form>
-      </div>
     </nav>
     <!--  -->
     {% endif %}
@@ -132,6 +143,12 @@
     <div class="container py-4">
       {% block content %}{% endblock %}
     </div>
+
+    <footer class="footer">
+      <div class="container">
+        <span style="font-weight:bolder;">Fyyur &copy; All Rights Reserved.</span>
+      </div>
+    </footer>
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

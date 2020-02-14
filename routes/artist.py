@@ -1,5 +1,5 @@
 import json
-from flask import render_template, url_for, redirect, request
+from flask import render_template, url_for, redirect, request, flash
 from models.Artist import Artist
 from forms.Artist import ArtistForm
 from models.Show import Show
@@ -34,17 +34,26 @@ class ArtistRouter:
         })
 
     def create():
-        if request.method == 'POST':
-            name = request.form.get('name')
-            city = request.form.get('city')
-            state = request.form.get('state')
-            phone = request.form.get('phone')
-            genres = ','.join(request.form.get('genres'))
-            facebook_link = request.form.get('facebook_link')
+        form = ArtistForm()
+        print("\n\nForm: ")
+        print(form.name.data)
+        print(form.city.data)
+        print(form.state.data)
+        print(form.phone.data)
+        print(form.genres.data)
+        print(form.facebook_link.data)
+        print("\n\n")
+        if request.method == 'POST' and form.validate_on_submit():
+            name = request.form.name.data
+            city = request.form.city.data
+            state = request.form.state.data
+            phone = request.form.phone.data
+            genres = request.form.genres.data
+            facebook_link = request.form.facebook_link.data
             artist = Artist(name=name, city=city, state=state, phone=phone, genres=genres, facebook_link=facebook_link)
             db.session.add(artist)
             db.session.commit()
+            flash('successfully created a new artist')
             return redirect(url_for('view_all_artists'))
-        elif request.method == 'GET':
-            form = ArtistForm()
+        else:
             return render_template('forms/create_artist.html', form=form)

@@ -40,7 +40,7 @@ class VenueRouter:
             city = data['city']
             state = data['state']
             phone = data['phone']
-            genres = ','.join(data['genres'])
+            genres = data['genres']
             facebook_link = data['facebook_link']
             venue = Venue(name=name, city=city, state=state, phone=phone, genres=genres, facebook_link=facebook_link)
             db.session.add(venue)

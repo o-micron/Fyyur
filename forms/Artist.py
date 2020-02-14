@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, SelectMultipleField, DateTimeField, SubmitField
+from wtforms import StringField, SelectField, SelectMultipleField, DateTimeField
 from wtforms.validators import DataRequired, AnyOf, URL, Regexp
 from models.shared import db
 
@@ -100,4 +100,3 @@ class ArtistForm(FlaskForm):
     facebook_link = StringField(
         'facebook_link', validators=[URL()]
     )
-    submit = SubmitField('Create artist')

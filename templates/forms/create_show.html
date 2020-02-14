@@ -1,5 +1,5 @@
 {% set navlinks = [ { 'name': 'Venues', 'class': '', 'link': '/venues'}, {
-'name': 'Artists', 'class': 'text-primary', 'link': '/artists'}, { 'name':
+'name': 'Artists', 'class': '', 'link': '/artists'}, { 'name':
 'Shows', 'class': '', 'link': '/shows'} ] %}
 {% extends 'layouts/main.html' %}
 {% block title %}Create Show{% endblock %}
@@ -12,7 +12,7 @@
             CREATE A NEW SHOW
         </h3>
       </div>
-      <form method="POST">
+      <form action="" method="POST">
         {{ form.hidden_tag() }}
         <div class="form-group" style="text-align: left;">
           <small class="text-warning">Artists IDs can be found in their profile pages</small>
@@ -31,14 +31,10 @@
           {% endfor %}
           {% endif %}
           {% endfor %}
-          {{ form.start_time(class_='form-control', placeholder="start time ", autofocus=true) }}
+          {{ form.start_time(class_='form-control', placeholder="start time", autofocus=true) }}
         </div>
         <div class="form-group">
-          <input
-            type="submit"
-            value="Create Show"
-            class="btn btn-primary btn-lg btn-block"
-          />
+          <input type="submit" value="Create Show" class="btn btn-primary btn-lg btn-block" />
         </div>
       </form>
     </div>

@@ -7,14 +7,18 @@ from forms.Show import ShowForm
 
 class ShowRouter:
     def view_all():
+        notifications = [] + pending_notifications
+        pending_notifications.clear()
         return render_template('shows.html', data={
             'shows': Show.query.all()
-        })
+        }, notifications=notifications)
 
     def view_detail(show_id):
+        notifications = [] + pending_notifications
+        pending_notifications.clear()
         return render_template('show.html', data={
             'show': Show.query.get(show_id)
-        })
+        }, notifications=notifications)
 
     def create():
         form = ShowForm(request.form)
@@ -26,12 +30,13 @@ class ShowRouter:
             db.session.add(show)
             try:
                 db.session.commit()
-                pending_notifications.append("Created a new show successfully")
+                pending_notifications.append({"title": "Success", "body": "Created a new show successfully"})
                 return redirect(url_for('view_all_shows'))
             except Exception:
                 db.session.rollback()
-                pending_notifications.append("Invalid Data, Couldn't create a new show")
+                pending_notifications.append({"title": "Failure", "body": "Invalid Data, Couldn't create a new show"})
                 return redirect(url_for('create_show'))
-
-        return render_template('forms/create_show.html', form=form, notifications=pending_notifications)
+        notifications = [] + pending_notifications
+        pending_notifications.clear()
+        return render_template('forms/create_show.html', form=form, notifications=notifications)
         

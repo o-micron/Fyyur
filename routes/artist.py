@@ -3,7 +3,7 @@ from flask import render_template, url_for, redirect, request, flash
 from models.Artist import Artist
 from forms.Artist import ArtistForm
 from models.Show import Show
-from models.shared import db
+from models.shared import db, pending_notifications
 
 
 class ArtistRouter:
@@ -22,28 +22,24 @@ class ArtistRouter:
                     'searchQuery': ''
                 })
         else:
+            notifications = [] + pending_notifications
+            pending_notifications.clear()
             return render_template('artists.html', data={
                 'artists': Artist.query.all(),
                 'searchQuery': ''
-            })
+            }, notifications=notifications)
 
     def view_detail(artist_id):
+        notifications = [] + pending_notifications
+        pending_notifications.clear()
         return render_template('artist.html', data={
             'artist': Artist.query.get(artist_id),
             'shows': Show.query.filter(Show.artist_id == artist_id)
-        })
+        }, notifications=notifications)
 
     def create():
         form = ArtistForm(request.form)
-        if request.method == 'POST' and form.validate():
-            print("\n\nForm: ")
-            print(form.name.data)
-            print(form.city.data)
-            print(form.state.data)
-            print(form.phone.data)
-            print(form.genres.data)
-            print(form.facebook_link.data)
-            print("\n\n")
+        if request.method == 'POST' and form.validate_on_submit():
             name = form.name.data
             city = form.city.data
             state = form.state.data
@@ -52,7 +48,15 @@ class ArtistRouter:
             facebook_link = form.facebook_link.data
             artist = Artist(name=name, city=city, state=state, phone=phone, genres=genres, facebook_link=facebook_link)
             db.session.add(artist)
-            db.session.commit()
-            flash('successfully created a new artist')
-            return redirect(url_for('view_all_artists'))
-        return render_template('forms/create_artist.html', form=form)
+            try:
+                db.session.commit()
+                pending_notifications.append({"title": "Success", "body": "Created a new artist successfully"})
+                flash("Sucess.")
+                return redirect(url_for('view_all_artists'))
+            except Exception:
+                db.session.rollback()
+                pending_notifications.append({"title": "Failure", "body": "Invalid Data, Couldn't create a new artist"})
+                return redirect(url_for('create_artist'))
+        notifications = [] + pending_notifications
+        pending_notifications.clear()
+        return render_template('forms/create_artist.html', form=form, notifications=notifications)

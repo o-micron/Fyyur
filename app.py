@@ -46,7 +46,7 @@ def server_error(error):
 
 
 @app.route('/')
-def intex():
+def index():
     return render_template('index.html')
 
 

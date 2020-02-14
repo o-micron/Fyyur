@@ -34,26 +34,25 @@ class ArtistRouter:
         })
 
     def create():
-        form = ArtistForm()
-        print("\n\nForm: ")
-        print(form.name.data)
-        print(form.city.data)
-        print(form.state.data)
-        print(form.phone.data)
-        print(form.genres.data)
-        print(form.facebook_link.data)
-        print("\n\n")
-        if request.method == 'POST' and form.validate_on_submit():
-            name = request.form.name.data
-            city = request.form.city.data
-            state = request.form.state.data
-            phone = request.form.phone.data
-            genres = request.form.genres.data
-            facebook_link = request.form.facebook_link.data
+        form = ArtistForm(request.form)
+        if request.method == 'POST' and form.validate():
+            print("\n\nForm: ")
+            print(form.name.data)
+            print(form.city.data)
+            print(form.state.data)
+            print(form.phone.data)
+            print(form.genres.data)
+            print(form.facebook_link.data)
+            print("\n\n")
+            name = form.name.data
+            city = form.city.data
+            state = form.state.data
+            phone = form.phone.data
+            genres = ','.join(form.genres.data)
+            facebook_link = form.facebook_link.data
             artist = Artist(name=name, city=city, state=state, phone=phone, genres=genres, facebook_link=facebook_link)
             db.session.add(artist)
             db.session.commit()
             flash('successfully created a new artist')
             return redirect(url_for('view_all_artists'))
-        else:
-            return render_template('forms/create_artist.html', form=form)
+        return render_template('forms/create_artist.html', form=form)

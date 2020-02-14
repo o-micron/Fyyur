@@ -13,6 +13,7 @@
         </h3>
       </div>
       <form method="POST">
+        {{ form.hidden_tag() }}
         <div class="form-group" style="text-align: left;">
           <small class="text-warning">Artists IDs can be found in their profile pages</small>
           {{ form.artist_id(class_='form-control', placeholder="artist id", autofocus=true) }}
@@ -23,6 +24,13 @@
         </div>
         <div class="form-group" style="text-align: left;">
           <small class="text-warning">time format YYYY-MM-DD HH:MM:SS</small>
+          {% for field in form.errors %}
+          {% if field.name == start_time %}
+          {% for error in form.errors[field] %}
+          <br><small class="text-danger">{{error}}</small>
+          {% endfor %}
+          {% endif %}
+          {% endfor %}
           {{ form.start_time(class_='form-control', placeholder="start time ", autofocus=true) }}
         </div>
         <div class="form-group">

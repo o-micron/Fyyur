@@ -1,12 +1,10 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, SelectMultipleField, DateTimeField
+from wtforms import StringField, SelectField, SelectMultipleField, DateTimeField, SubmitField
 from wtforms.validators import DataRequired, AnyOf, URL, Regexp
 from models.shared import db
 
 class ArtistForm(FlaskForm):
-    name = StringField(
-        'name', validators=[DataRequired()]
-    )
+    name = StringField(validators=[DataRequired()])
     genres = SelectMultipleField(
         'genres', validators=[DataRequired()],
         choices=[
@@ -91,7 +89,7 @@ class ArtistForm(FlaskForm):
         ]
     )
     phone = StringField(
-        'phone', validators=[Regexp('[0-9\-]+')]
+        'phone'
     )
     website = StringField(
         'website', validators=[URL()]
@@ -102,3 +100,4 @@ class ArtistForm(FlaskForm):
     facebook_link = StringField(
         'facebook_link', validators=[URL()]
     )
+    submit = SubmitField('Create artist')

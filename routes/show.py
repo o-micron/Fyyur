@@ -2,7 +2,7 @@ from datetime import datetime
 import json
 from flask import render_template, url_for, redirect, request
 from models.Show import Show
-from models.shared import db
+from models.shared import db, pending_notifications
 from forms.Show import ShowForm
 
 class ShowRouter:
@@ -17,15 +17,21 @@ class ShowRouter:
         })
 
     def create():
-        if request.method == 'POST':
-            data = json.loads(request.data)
-            artist_id = data['artist_id']
-            venue_id = data['venue_id']
-            start_time = datetime.strptime(data['start_time'], "%Y-%m-%d %H:%M:%S")
+        form = ShowForm(request.form)
+        if request.method == 'POST' and form.validate_on_submit():
+            artist_id = form.artist_id.data
+            venue_id = form.venue_id.data
+            start_time = form.start_time.data
             show = Show(artist_id=artist_id, venue_id=venue_id, start_time=start_time)
             db.session.add(show)
-            db.session.commit()
-            return redirect(url_for('view_all_shows'))
-        elif request.method == 'GET':
-            form = ShowForm()
-            return render_template('forms/create_show.html', form=form)
+            try:
+                db.session.commit()
+                pending_notifications.append("Created a new show successfully")
+                return redirect(url_for('view_all_shows'))
+            except Exception:
+                db.session.rollback()
+                pending_notifications.append("Invalid Data, Couldn't create a new show")
+                return redirect(url_for('create_show'))
+
+        return render_template('forms/create_show.html', form=form, notifications=pending_notifications)
+        

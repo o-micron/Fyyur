@@ -114,7 +114,25 @@
     <!--  -->
     {% endif %}
 
-    {% block content %}{% endblock %}
+    {% if notifications %}
+    {% if notifications|length > 0 %}
+    <div class="position-absolute w-100 d-flex flex-column p-4">
+      {% for notification in notifications %}
+      <div class="toast ml-auto" role="alert" data-delay="5000" data-autohide="true">
+          <div class="toast-header">
+              <strong class="mr-auto text-primary">Toast</strong>
+              <small class="text-muted">3 mins ago</small>
+          </div>
+          <div class="toast-body"> {{ notification }} </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% endif %}
+
+    <div class="container py-4">
+      {% block content %}{% endblock %}
+    </div>
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -228,6 +246,7 @@
       $(function () {
         $('[data-toggle="tooltip"]').tooltip()
       })
+      $('.toast').toast('show');
     </script>
     {% endif %}
     {% block scripts %}{% endblock %}

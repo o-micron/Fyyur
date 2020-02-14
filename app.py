@@ -10,7 +10,6 @@ from routes.artist import ArtistRouter
 from routes.show import ShowRouter
 from routes.venue import VenueRouter
 
-
 ## -----------------------------------------------------------------------------------------------
 ## Setup
 ## -----------------------------------------------------------------------------------------------
@@ -60,7 +59,7 @@ def view_all_artists():
 def view_artist(artist_id):
     return ArtistRouter.view_detail(artist_id)
 
-@app.route('/artists/create', methods=['POST'])
+@app.route('/artists/create', methods=['GET', 'POST'])
 def create_artist():
     return ArtistRouter.create()
 
@@ -74,7 +73,7 @@ def view_all_shows():
 def view_show(show_id):
     return ShowRouter.view_detail(show_id)
 
-@app.route('/shows/create', methods=['POST'])
+@app.route('/shows/create', methods=['GET', 'POST'])
 def create_show():
     return ShowRouter.create()
 
@@ -87,7 +86,7 @@ def view_all_venues():
 def view_venue(venue_id):
     return VenueRouter.view_detail(venue_id)
 
-@app.route('/venues/create', methods=['POST'])
+@app.route('/venues/create', methods=['GET', 'POST'])
 def create_venue():
     return VenueRouter.create()
 ## -----------------------------------------------------------------------------------------------

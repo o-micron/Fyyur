@@ -1,6 +1,7 @@
 import json
 from flask import render_template, url_for, redirect, request
 from models.Artist import Artist
+from forms.Artist import ArtistForm
 from models.Show import Show
 from models.shared import db
 
@@ -33,14 +34,17 @@ class ArtistRouter:
         })
 
     def create():
-        data = json.loads(request.data)
-        name = data['name']
-        city = data['city']
-        state = data['state']
-        phone = data['phone']
-        genres = ','.join(data['genres'])
-        facebook_link = data['facebook_link']
-        artist = Artist(name=name, city=city, state=state, phone=phone, genres=genres, facebook_link=facebook_link)
-        db.session.add(artist)
-        db.session.commit()
-        return redirect(url_for('view_all_artists'))
+        if request.method == 'POST':
+            name = request.form.get('name')
+            city = request.form.get('city')
+            state = request.form.get('state')
+            phone = request.form.get('phone')
+            genres = ','.join(request.form.get('genres'))
+            facebook_link = request.form.get('facebook_link')
+            artist = Artist(name=name, city=city, state=state, phone=phone, genres=genres, facebook_link=facebook_link)
+            db.session.add(artist)
+            db.session.commit()
+            return redirect(url_for('view_all_artists'))
+        elif request.method == 'GET':
+            form = ArtistForm()
+            return render_template('forms/create_artist.html', form=form)

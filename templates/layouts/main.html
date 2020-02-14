@@ -98,149 +98,19 @@
         </ul>
         <form class="form-inline">
           <div class="form-group mx-sm-3 mb-2">
-            <a class="nav-link custom-color" href="#" data-toggle="modal" data-target="#create-artist-modal" data-whatever="artist">
+            <a class="nav-link custom-color" href="/artists/create">
               Artist <i class="fas fa-plus-circle"></i>
             </a>
-            <a class="nav-link custom-color" href="#" data-toggle="modal" data-target="#create-venue-modal" data-whatever="venue">
+            <a class="nav-link custom-color" href="/venues/create">
               Venue <i class="fas fa-plus-circle"></i>
             </a>
-            <a class="nav-link custom-color" href="#" data-toggle="modal" data-target="#create-show-modal" data-whatever="show">
+            <a class="nav-link custom-color" href="/shows/create">
               Show <i class="fas fa-plus-circle"></i>
             </a>
           </div>
         </form>
       </div>
     </nav>
-    <!-- Create a new artist -->
-    <div class="modal fade" id="create-artist-modal" tabindex="-1" role="dialog" aria-labelledby="create-artist-modal-label" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="create-artist-modal-label">List a new artist</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="form-group">
-                <input type="text" class="form-control" id="create-artist-modal-name" name="name" placeholder="Name">
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <input type="text" class="form-control" id="create-artist-modal-city" name="city" placeholder="City">
-                </div>
-                <div class="form-group col-md-6">
-                  <input type="text" class="form-control" id="create-artist-modal-state" name="state" placeholder="State">
-                </div>
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" id="create-artist-modal-phone" name="phone" placeholder="Phone">
-              </div>
-              <div class="form-group">
-                <small class="text-warning">Ctrl+Click to select multiple</small>
-                <select multiple class="form-control" id="create-artist-modal-genres" name="genres">
-                  <option>Rock</option>
-                  <option>Alternative</option>
-                  <option>Pop</option>
-                  <option>Rap</option>
-                  <option>R&B</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" id="create-artist-modal-facebookLink" name="facebook_link" placeholder="Facebook Link">
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" onclick="createArtist()">Create</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--  -->
-    <!-- Create a new Venue -->
-    <div class="modal fade" id="create-venue-modal" tabindex="-1" role="dialog" aria-labelledby="create-venue-modal-label" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="create-venue-modal-label">List a new venue</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="form-group">
-                <input type="text" class="form-control" id="create-venue-modal-name" name="name" placeholder="Name">
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <input type="text" class="form-control" id="create-venue-modal-city" name="city" placeholder="City">
-                </div>
-                <div class="form-group col-md-6">
-                  <input type="text" class="form-control" id="create-venue-modal-state" name="state" placeholder="State">
-                </div>
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" id="create-venue-modal-phone" name="phone" placeholder="Phone">
-              </div>
-              <div class="form-group">
-                <small class="text-warning">Ctrl+Click to select multiple</small>
-                <select multiple class="form-control" id="create-venue-modal-genres" name="genres">
-                  <option>Rock</option>
-                  <option>Alternative</option>
-                  <option>Pop</option>
-                  <option>Rap</option>
-                  <option>R&B</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" id="create-venue-modal-facebookLink" name="facebook_link" placeholder="Facebook Link">
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" onclick="createVenue()">Create</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--  -->
-    <!-- Create a new show -->
-    <div class="modal fade" id="create-show-modal" tabindex="-1" role="dialog" aria-labelledby="create-show-modal-label" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="create-show-modal-label">List a new show</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="form-group">
-                <small class="text-warning"><strong>Artist ID</strong> can be found on the artist's page</small>
-                <input type="text" class="form-control" id="create-show-modal-artist-id" name="artist_id" placeholder="Artist ID">
-              </div>
-              <div class="form-group">
-                <small class="text-warning"><strong>Venue ID</strong> can be found on the venue's page</small>
-                <input type="text" class="form-control" id="create-show-modal-venue-id" name="venue_id" placeholder="Venue ID">
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" id="create-show-modal-start_time" name="start_time" value="{{ '' | date_now }}" placeholder="Date of the show .. YYYY-MM-DD HH:MM:SS">
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" onclick="createShow()">Create</button>
-          </div>
-        </div>
-      </div>
-    </div>
     <!--  -->
     {% endif %}
 
@@ -302,7 +172,7 @@
             'Content-Type': 'application/json'
           }
         }).then(response => {
-          console.log("OK: " + response);
+          console.log("OK: " + response.status);
         }).catch(err => {
           console.log("ERROR: " + err);
         });
@@ -329,7 +199,7 @@
             'Content-Type': 'application/json'
           }
         }).then(response => {
-          console.log("OK: " + response);
+          console.log("OK: " + response.status);
         }).catch(err => {
           console.log("ERROR: " + err);
         });;
@@ -350,10 +220,10 @@
             'Content-Type': 'application/json'
           }
         }).then(response => {
-          console.log("OK: " + response);
+          console.log("OK: " + response.status);
         }).catch(err => {
           console.log("ERROR: " + err);
-        });;
+        });
       }
       $(function () {
         $('[data-toggle="tooltip"]').tooltip()

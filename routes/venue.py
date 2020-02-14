@@ -3,6 +3,7 @@ from flask import render_template, url_for, redirect, request
 from models.Venue import Venue
 from models.Show import Show
 from models.shared import db
+from forms.Venue import VenueForm
 
 
 class VenueRouter:
@@ -33,14 +34,18 @@ class VenueRouter:
         })
 
     def create():
-        data = json.loads(request.data)
-        name = data['name']
-        city = data['city']
-        state = data['state']
-        phone = data['phone']
-        genres = ','.join(data['genres'])
-        facebook_link = data['facebook_link']
-        venue = Venue(name=name, city=city, state=state, phone=phone, genres=genres, facebook_link=facebook_link)
-        db.session.add(venue)
-        db.session.commit()
-        return redirect(url_for('view_all_venues'))
+        if request.method == 'POST':
+            data = json.loads(request.data)
+            name = data['name']
+            city = data['city']
+            state = data['state']
+            phone = data['phone']
+            genres = ','.join(data['genres'])
+            facebook_link = data['facebook_link']
+            venue = Venue(name=name, city=city, state=state, phone=phone, genres=genres, facebook_link=facebook_link)
+            db.session.add(venue)
+            db.session.commit()
+            return redirect(url_for('view_all_venues'))
+        elif request.method == 'GET':
+            form = VenueForm()
+            return render_template('forms/create_venue.html', form=form)

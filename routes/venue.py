@@ -53,11 +53,12 @@ class VenueRouter:
                 db.session.commit()
                 pending_notifications.append({"title": "Success", "body": "Created a new venue successfully"})
                 return redirect(url_for('view_all_venues'))
-            except Exception:
+            except Exception as err:
                 db.session.rollback()
                 pending_notifications.append({"title": "Failure", "body": "Invalid Data, Couldn't create a new venue"})
                 notifications = [] + pending_notifications
                 pending_notifications.clear()
+                print(err)
                 return render_template('forms/create_venue.html', form=form, notifications=notifications)
         notifications = [] + pending_notifications
         pending_notifications.clear()

@@ -243,37 +243,37 @@ for show in shows:
 # -------------------------------------------------------------------------------------------------
 # ADD EXTRA MOCK DATA
 # -------------------------------------------------------------------------------------------------
-with open('data/artists.json', 'r') as file:
-    mock_artists = json.load(file)
-    for artist in mock_artists:
-        cmd = """
-        INSERT INTO artists
-        (id, name, genres, city, state, phone, website, seeking_venue_description, image_link, facebook_link)
-        VALUES
-        ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');
-        """ % (artist.get('id'), artist.get('name'), ','.join(artist.get('genres')), artist.get('city'), artist.get('state'), artist.get('phone'), artist.get('website'), artist.get('seeking_venue_description'), artist.get('image_link'), artist.get('facebook_link'))
-        try:
-            cursor.execute(cmd)
-        except psycopg2.IntegrityError:
-            connection.rollback()
-        else:
-            connection.commit()
+# with open('data/artists.json', 'r') as file:
+#     mock_artists = json.load(file)
+#     for artist in mock_artists:
+#         cmd = """
+#         INSERT INTO artists
+#         (id, name, genres, city, state, phone, website, seeking_venue_description, image_link, facebook_link)
+#         VALUES
+#         ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');
+#         """ % (artist.get('id'), artist.get('name'), ','.join(artist.get('genres')), artist.get('city'), artist.get('state'), artist.get('phone'), artist.get('website'), artist.get('seeking_venue_description'), artist.get('image_link'), artist.get('facebook_link'))
+#         try:
+#             cursor.execute(cmd)
+#         except psycopg2.IntegrityError:
+#             connection.rollback()
+#         else:
+#             connection.commit()
 
-with open('data/venues.json', 'r') as file:
-    mock_venues = json.load(file)
-    for venue in mock_venues:
-        cmd = """
-        INSERT INTO venues
-        (id, name, genres, city, state, address, phone, seeking_talent_description, website, image_link, facebook_link)
-        VALUES
-        ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');
-        """ % (venue.get('id'), venue.get('name'), ','.join(venue.get('genres')), venue.get('city'), venue.get('state'), venue.get('address'), venue.get('phone'), venue.get('seeking_talent_description'), venue.get('website'), venue.get('image_link'), venue.get('facebook_link'))
-        try:
-            cursor.execute(cmd)
-        except psycopg2.IntegrityError:
-            connection.rollback()
-        else:
-            connection.commit()
+# with open('data/venues.json', 'r') as file:
+#     mock_venues = json.load(file)
+#     for venue in mock_venues:
+#         cmd = """
+#         INSERT INTO venues
+#         (id, name, genres, city, state, address, phone, seeking_talent_description, website, image_link, facebook_link)
+#         VALUES
+#         ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');
+#         """ % (venue.get('id'), venue.get('name'), ','.join(venue.get('genres')), venue.get('city'), venue.get('state'), venue.get('address'), venue.get('phone'), venue.get('seeking_talent_description'), venue.get('website'), venue.get('image_link'), venue.get('facebook_link'))
+#         try:
+#             cursor.execute(cmd)
+#         except psycopg2.IntegrityError:
+#             connection.rollback()
+#         else:
+#             connection.commit()
 # -------------------------------------------------------------------------------------------------
 
 cursor.close()

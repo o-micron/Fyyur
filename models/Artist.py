@@ -6,12 +6,12 @@ class Artist(db.Model):
     __tablename__ = 'artists'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(40), nullable=False, unique=True)
-    genres = db.Column(db.String(150), nullable=False)
-    city = db.Column(db.String(120), nullable=False)
-    state = db.Column(db.String(120), nullable=False)
-    phone = db.Column(db.String(120), default="")
-    seeking_venue_description = db.Column(db.String(300), default="")
+    name = db.Column(db.String, nullable=False, unique=True)
+    genres = db.Column(db.String, nullable=False)
+    city = db.Column(db.String, nullable=False)
+    state = db.Column(db.String, nullable=False)
+    phone = db.Column(db.String, default="")
+    seeking_venue_description = db.Column(db.String, default="")
     website = db.Column(db.String, default="")
     image_link = db.Column(db.String, default="")
     facebook_link = db.Column(db.String, default="")

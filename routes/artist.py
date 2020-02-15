@@ -39,12 +39,14 @@ class ArtistRouter:
 
     def create():
         form = ArtistForm(request.form)
-        if request.method == 'POST' and form.validate_on_submit():
+        if form.validate_on_submit():
             name = form.name.data
+            genres = ','.join(form.genres.data)
             city = form.city.data
             state = form.state.data
             phone = form.phone.data
-            genres = ','.join(form.genres.data)
+            website = form.website.data
+            image_link = form.image_link.data
             facebook_link = form.facebook_link.data
             artist = Artist(name=name, city=city, state=state, phone=phone, genres=genres, facebook_link=facebook_link)
             db.session.add(artist)
@@ -56,7 +58,9 @@ class ArtistRouter:
             except Exception:
                 db.session.rollback()
                 pending_notifications.append({"title": "Failure", "body": "Invalid Data, Couldn't create a new artist"})
-                return redirect(url_for('create_artist'))
+                notifications = [] + pending_notifications
+                pending_notifications.clear()
+                return render_template('forms/create_artist.html', form=form, notifications=notifications)
         notifications = [] + pending_notifications
         pending_notifications.clear()
         return render_template('forms/create_artist.html', form=form, notifications=notifications)

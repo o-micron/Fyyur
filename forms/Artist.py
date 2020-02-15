@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, SelectMultipleField, DateTimeField
-from wtforms.validators import DataRequired, AnyOf, URL, Regexp
+from wtforms.validators import DataRequired, AnyOf, URL, Regexp, Optional
 from models.shared import db
 
 class ArtistForm(FlaskForm):
@@ -89,14 +89,14 @@ class ArtistForm(FlaskForm):
         ]
     )
     phone = StringField(
-        'phone'
+        'phone', validators=[Optional(), Regexp('[0-9\-]+', message="Please provide a valid phone number")]
     )
     website = StringField(
-        'website', validators=[URL()]
+        'website', validators=[Optional(), URL()]
     )
     image_link = StringField(
-        'image_link', validators=[URL()]
+        'image_link', validators=[Optional(), URL()]
     )
     facebook_link = StringField(
-        'facebook_link', validators=[URL()]
+        'facebook_link', validators=[Optional(), URL()]
     )

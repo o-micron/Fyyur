@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, SelectMultipleField, DateTimeField
-from wtforms.validators import DataRequired, AnyOf, URL, Regexp
+from wtforms.validators import DataRequired, AnyOf, URL, Regexp, Optional
 
 class VenueForm(FlaskForm):
     name = StringField(
@@ -90,17 +90,17 @@ class VenueForm(FlaskForm):
         ]
     )
     address = StringField(
-        'address'
+        'address', validators=[Optional()]
     )
     phone = StringField(
-        'phone', validators=[Regexp('[0-9\-]+')]
+        'phone', validators=[Optional(), Regexp('[0-9\-]+')]
     )
     website = StringField(
-        'website', validators=[URL()]
+        'website', validators=[Optional(), URL()]
     )
     image_link = StringField(
-        'image_link', validators=[URL()]
+        'image_link', validators=[Optional(), URL()]
     )
     facebook_link = StringField(
-        'facebook_link', validators=[URL()]
+        'facebook_link', validators=[Optional(), URL()]
     )

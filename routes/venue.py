@@ -39,7 +39,7 @@ class VenueRouter:
 
     def create():
         form = VenueForm(request.form)
-        if request.method == 'POST' and form.validate_on_submit():
+        if form.validate_on_submit():
             name = form.name.data
             city = form.city.data
             state = form.state.data
@@ -56,7 +56,9 @@ class VenueRouter:
             except Exception:
                 db.session.rollback()
                 pending_notifications.append({"title": "Failure", "body": "Invalid Data, Couldn't create a new venue"})
-                return redirect(url_for('create_venue'))
+                notifications = [] + pending_notifications
+                pending_notifications.clear()
+                return render_template('forms/create_venue.html', form=form, notifications=notifications)
         notifications = [] + pending_notifications
         pending_notifications.clear()
         return render_template('forms/create_venue.html', form=form, notifications=notifications)

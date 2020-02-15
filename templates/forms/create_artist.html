@@ -34,7 +34,14 @@
             {% endif %}
           </div>
           <div class="form-group col-md-6">
+            {% if 'state' in form.errors %}
+            {{ form.state(class_ = 'form-control is-invalid', placeholder="State", autofocus = true) }}
+            <div class="invalid-feedback" style="text-align: left;">
+              {{ form.errors['state'][0] }}
+            </div>
+            {% else %}
             {{ form.state(class_ = 'form-control', placeholder="State", autofocus = true) }}
+            {% endif %}
           </div>
         </div>
         <div class="form-group">

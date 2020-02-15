@@ -22,7 +22,7 @@ class ShowRouter:
 
     def create():
         form = ShowForm(request.form)
-        if request.method == 'POST' and form.validate_on_submit():
+        if form.validate_on_submit():
             artist_id = form.artist_id.data
             venue_id = form.venue_id.data
             start_time = form.start_time.data
@@ -35,7 +35,9 @@ class ShowRouter:
             except Exception:
                 db.session.rollback()
                 pending_notifications.append({"title": "Failure", "body": "Invalid Data, Couldn't create a new show"})
-                return redirect(url_for('create_show'))
+                notifications = [] + pending_notifications
+                pending_notifications.clear()
+                return render_template('forms/create_show.html', form=form, notifications=notifications)
         notifications = [] + pending_notifications
         pending_notifications.clear()
         return render_template('forms/create_show.html', form=form, notifications=notifications)

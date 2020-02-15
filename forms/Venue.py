@@ -3,11 +3,9 @@ from wtforms import StringField, SelectField, SelectMultipleField, DateTimeField
 from wtforms.validators import DataRequired, AnyOf, URL, Regexp, Optional
 
 class VenueForm(FlaskForm):
-    name = StringField(
-        'name', validators=[DataRequired()]
-    )
+    name = StringField('name', validators=[DataRequired(), Regexp('^[a-zA-Z0-9 ]+$', message="name only accepts alphanumeric characters")])
     genres = SelectMultipleField(
-        'genres', validators=[DataRequired()],
+        'genres', validators=[DataRequired(message="Please select at least one genre")],
         choices=[
             ('Alternative', 'Alternative'),
             ('Blues', 'Blues'),
@@ -31,7 +29,7 @@ class VenueForm(FlaskForm):
         ]
     )
     city = StringField(
-        'city', validators=[DataRequired()]
+        'city', validators=[Regexp('^[a-zA-Z ]*$', message="Please enter a valid City name")]
     )
     state = SelectField(
         'state', validators=[DataRequired()],
@@ -93,14 +91,14 @@ class VenueForm(FlaskForm):
         'address', validators=[Optional()]
     )
     phone = StringField(
-        'phone', validators=[Optional(), Regexp('[0-9\-]+')]
+        'phone', validators=[Optional(), Regexp('^[0-9\-]+$', message="Please provide a valid phone number")]
     )
     website = StringField(
-        'website', validators=[Optional(), URL()]
+        'website', validators=[Optional(), URL(message="Please provide a valid website link")]
     )
     image_link = StringField(
-        'image_link', validators=[Optional(), URL()]
+        'image_link', validators=[Optional(), URL(message="Please provide a valid image link")]
     )
     facebook_link = StringField(
-        'facebook_link', validators=[Optional(), URL()]
+        'facebook_link', validators=[Optional(), URL(message="Please provide a valid facebook link")]
     )

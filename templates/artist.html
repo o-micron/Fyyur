@@ -31,7 +31,7 @@
           </span>
           {{ data.artist.city }}, {{ data.artist.state }}
         </div>
-        {% if data.artist.phone != "None" %}
+        {% if data.artist.phone != "" %}
         <div>
           <span class="text-dark" style="font-size: 1.4rem;">
             <i class="fas fa-phone-alt"></i>
@@ -39,7 +39,7 @@
           {{ data.artist.phone }}
         </div>
         {% endif %}
-        {% if data.artist.website != "None" %}
+        {% if data.artist.website != "" %}
         <div>
           <span class="text-primary" style="font-size: 1.4rem;">
             <i class="fas fa-link"></i>
@@ -47,7 +47,7 @@
           <a href="{{ data.artist.website }}">{{ data.artist.website[:25] }}</a>
         </div>
         {% endif %}
-        {% if data.artist.facebook_link != "None" %}
+        {% if data.artist.facebook_link != "" %}
         <div>
           <span class="text-primary" style="font-size: 1.4rem;">
             <i class="fab fa-facebook-square"></i>

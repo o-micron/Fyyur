@@ -31,7 +31,7 @@
             </span>
             {{ data.venue.city }}, {{ data.venue.state }}
           </div>
-          {% if data.venue.phone != "None" %}
+          {% if data.venue.phone != "" %}
           <div>
             <span class="text-dark" style="font-size: 1.4rem;">
               <i class="fas fa-phone-alt"></i>
@@ -39,7 +39,7 @@
             {{ data.venue.phone }}
           </div>
           {% endif %}
-          {% if data.venue.website != "None" %}
+          {% if data.venue.website != "" %}
           <div>
             <span class="text-primary" style="font-size: 1.4rem;">
               <i class="fas fa-link"></i>
@@ -47,7 +47,7 @@
             <a href="{{ data.venue.website }}">{{ data.venue.website[:25] }}</a>
           </div>
           {% endif %}
-          {% if data.venue.facebook_link != "None" %}
+          {% if data.venue.facebook_link != "" %}
           <div>
             <span class="text-primary" style="font-size: 1.4rem;">
               <i class="fab fa-facebook-square"></i>

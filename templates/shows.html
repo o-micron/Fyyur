@@ -4,9 +4,9 @@
 {% extends 'layouts/main.html' %}
 {% block title %}Shows{% endblock %}
 {% block content %}
-<div class="container">
-  <div class="mid">
-    <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1">
+<div class="container py-4">
+  <div class="mid py-4">
+    <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 py-4">
       {% for show in data.shows|sort(attribute='start_time') %}
       <div class="col mb-4">
         <div class="card h-100">

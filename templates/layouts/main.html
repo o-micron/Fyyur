@@ -127,7 +127,7 @@
 
     {% if notifications %}
     {% if notifications|length > 0 %}
-    <div class="position-absolute w-100 d-flex flex-column p-4">
+    <div class="position-fixed d-flex flex-column p-4" style="top:20; right:0; z-index: 999;">
       {% for notification in notifications %}
       <div class="toast ml-auto" role="alert" data-delay="8000" data-autohide="true">
           <div class="toast-header">

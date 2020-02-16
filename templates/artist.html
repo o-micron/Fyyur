@@ -29,9 +29,14 @@
           <span class="text-danger" style="font-size: 1.4rem;">
             <i class="fas fa-map-marker-alt"></i>
           </span>
-          {{ data.artist.city }}, {{ data.artist.state }}
+          {% if data.artist.city != "" and data.artist.city != "None" %}
+            {{ data.artist.city }},
+          {% endif %}
+          {% if data.artist.state != "" and data.artist.state != "None" %}
+           {{ data.artist.state }}
+          {% endif%}
         </div>
-        {% if data.artist.phone != "" %}
+        {% if data.artist.phone != "" and data.artist.phone != "None" %}
         <div>
           <span class="text-dark" style="font-size: 1.4rem;">
             <i class="fas fa-phone-alt"></i>
@@ -39,7 +44,7 @@
           {{ data.artist.phone }}
         </div>
         {% endif %}
-        {% if data.artist.website != "" %}
+        {% if data.artist.website != "" and data.artist.website != "None" %}
         <div>
           <span class="text-primary" style="font-size: 1.4rem;">
             <i class="fas fa-link"></i>
@@ -47,7 +52,7 @@
           <a href="{{ data.artist.website }}">{{ data.artist.website[:25] }}</a>
         </div>
         {% endif %}
-        {% if data.artist.facebook_link != "" %}
+        {% if data.artist.facebook_link != "" and data.artist.facebook_link != "None" %}
         <div>
           <span class="text-primary" style="font-size: 1.4rem;">
             <i class="fab fa-facebook-square"></i>
@@ -57,7 +62,7 @@
           >
         </div>
         {% endif %}
-        {% if data.artist.seeking_venue_description != "" %}
+        {% if data.artist.seeking_venue_description != "" and data.artist.seeking_venue_description != "None" %}
         <a
           href="#"
           class="text-danger"

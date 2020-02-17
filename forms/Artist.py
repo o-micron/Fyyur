@@ -30,11 +30,12 @@ class ArtistForm(FlaskForm):
         ]
     )
     city = StringField(
-        'city', validators=[Regexp('^[a-zA-Z ]*$', message="Please enter a valid City name")]
+        'city', validators=[DataRequired(), Regexp('^[a-zA-Z ]*$', message="Please enter a valid City name")]
     )
     state = SelectField(
         'state', validators=[DataRequired()],
         choices=[
+            ('', ''),
             ('AL', 'AL'),
             ('AK', 'AK'),
             ('AZ', 'AZ'),

@@ -5,19 +5,19 @@
 {% block title %}Create Venue{% endblock %}
 {% block content %}
 <div class="container">
-  <div class="mid">
     <div style="margin-top: 5px; margin-bottom: 10px;">
       <div>
         <h3 style="text-align: left; margin-bottom: 30px;">
-          CREATE A NEW VENUE
+          VENUE FORM
         </h3>
       </div>
       <form action="" method="POST">
         {{ form.hidden_tag() }}
         <div class="form-group">
+          <label>Name <span class="text-danger">*</span> </label>
           {% if 'name' in form.errors %}
           {{ form.name(class_='form-control is-invalid', placeholder="Name", autofocus=true) }}
-          <div class="invalid-feedback" style="text-align: left;">
+          <div class="invalid-feedback">
             {{ form.errors['name'][0] }}
           </div>
           {% else %}
@@ -26,9 +26,10 @@
         </div>
         <div class="form-row">
           <div class="form-group col-md-6">
+            <label>City <span class="text-danger">*</span> </label>
             {% if 'city' in form.errors %}
             {{ form.city(class_ = 'form-control is-invalid', placeholder="City", autofocus = true) }}
-            <div class="invalid-feedback" style="text-align: left;">
+            <div class="invalid-feedback">
               {{ form.errors['city'][0] }}
             </div>
             {% else %}
@@ -36,9 +37,10 @@
             {% endif %}
           </div>
           <div class="form-group col-md-6">
+            <label>State <span class="text-danger">*</span> </label>
             {% if 'state' in form.errors %}
             {{ form.state(class_ = 'form-control is-invalid', placeholder="State", autofocus = true) }}
-            <div class="invalid-feedback" style="text-align: left;">
+            <div class="invalid-feedback">
               {{ form.errors['state'][0] }}
             </div>
             {% else %}
@@ -48,9 +50,10 @@
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
+              <label>Address <span class="text-danger">*</span> </label>
               {% if 'address' in form.errors %}
               {{ form.address(class_='form-control is-invalid', placeholder="Address", autofocus=true) }}
-              <div class="invalid-feedback" style="text-align: left;">
+              <div class="invalid-feedback">
                 {{ form.errors['address'][0] }}
               </div>
               {% else %}
@@ -58,9 +61,10 @@
               {% endif %}
             </div>
             <div class="form-group col-md-6">
+              <label>Phone</label>
               {% if 'phone' in form.errors %}
               {{ form.phone(class_ = 'form-control is-invalid', placeholder="Phone", autofocus = true) }}
-              <div class="invalid-feedback" style="text-align: left;">
+              <div class="invalid-feedback">
                 {{ form.errors['phone'][0] }}
               </div>
               {% else %}
@@ -68,53 +72,59 @@
               {%endif %}
             </div>
         </div>
-        <div class="form-group" style="text-align: left;">
+        <div class="form-group">
+          <label>Genres <span class="text-danger">*</span> </label>
+          <span style="display:inline-block; width:5px;"></span>
           <small class="text-warning">Ctrl+Click to select multiple</small>
           {% if 'genres' in form.errors %}
           {{ form.genres(class_ = 'form-control is-invalid', placeholder="Genres, separated by commas", id=form.state, autofocus = true) }}
-          <div class="invalid-feedback" style="text-align: left;">
+          <div class="invalid-feedback">
             {{ form.errors['genres'][0] }}
           </div>
           {% else %}
           {{ form.genres(class_ = 'form-control', placeholder="Genres, separated by commas", id=form.state, autofocus = true) }}
           {% endif %}
         </div>
-        <div class="form-group">
-          {% if 'website' in form.errors %}
-            {{ form.website(class_ = 'form-control is-invalid', placeholder="website link", autofocus = true) }}
-            <div class="invalid-feedback" style="text-align: left;">
-              {{ form.errors['website'][0] }}
-            </div>
-            {% else %}
-            {{ form.website(class_ = 'form-control', placeholder="website link", autofocus = true) }}
-            {% endif %}
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label>Website link</label>
+            {% if 'website' in form.errors %}
+              {{ form.website(class_ = 'form-control is-invalid', placeholder="website link", autofocus = true) }}
+              <div class="invalid-feedback">
+                {{ form.errors['website'][0] }}
+              </div>
+              {% else %}
+              {{ form.website(class_ = 'form-control', placeholder="website link", autofocus = true) }}
+              {% endif %}
+          </div>
+          <div class="form-group col-md-4">
+            <label>Image link</label>
+            {% if 'image_link' in form.errors %}
+              {{ form.image_link(class_ = 'form-control is-invalid', placeholder="image link", autofocus = true) }}
+              <div class="invalid-feedback">
+                {{ form.errors['image_link'][0] }}
+              </div>
+              {% else %}
+              {{ form.image_link(class_ = 'form-control', placeholder="image link", autofocus = true) }}
+              {% endif %}
+          </div>
+          <div class="form-group col-md-4">
+            <label>Facebook link</label>
+            {% if 'facebook_link' in form.errors %}
+              {{ form.facebook_link(class_ = 'form-control is-invalid', placeholder="Facebook Link", autofocus = true) }}
+              <div class="invalid-feedback">
+                {{ form.errors['facebook_link'][0] }}
+              </div>
+              {% else %}
+              {{ form.facebook_link(class_ = 'form-control', placeholder="Facebook Link", autofocus = true) }}
+              {% endif %}
+          </div>
         </div>
         <div class="form-group">
-          {% if 'image_link' in form.errors %}
-            {{ form.image_link(class_ = 'form-control is-invalid', placeholder="image link", autofocus = true) }}
-            <div class="invalid-feedback" style="text-align: left;">
-              {{ form.errors['image_link'][0] }}
-            </div>
-            {% else %}
-            {{ form.image_link(class_ = 'form-control', placeholder="image link", autofocus = true) }}
-            {% endif %}
-        </div>
-        <div class="form-group">
-          {% if 'facebook_link' in form.errors %}
-            {{ form.facebook_link(class_ = 'form-control is-invalid', placeholder="Facebook Link", autofocus = true) }}
-            <div class="invalid-feedback" style="text-align: left;">
-              {{ form.errors['facebook_link'][0] }}
-            </div>
-            {% else %}
-            {{ form.facebook_link(class_ = 'form-control', placeholder="Facebook Link", autofocus = true) }}
-            {% endif %}
-        </div>
-        <div class="form-group">
-          <input type="submit" value="Create Venue" class="btn btn-primary btn-lg btn-block" />
+          <input type="submit" value="Create a new venue" class="btn btn-primary btn-lg btn-block" />
         </div>
       </form>
     </div>
-  </div>
 </div>
 {% endblock %}
 {% block scripts %}

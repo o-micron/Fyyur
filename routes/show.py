@@ -10,7 +10,7 @@ class ShowRouter:
         notifications = [] + pending_notifications
         pending_notifications.clear()
         return render_template('shows.html', data={
-            'shows': Show.query.all()
+            'shows': Show.query.order_by('start_time').all()
         }, notifications=notifications)
 
     def view_detail(show_id):

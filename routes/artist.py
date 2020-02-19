@@ -13,19 +13,19 @@ class ArtistRouter:
             searchQuery = searchQuery.lstrip()
             if searchQuery:
                 return render_template('artists.html', data={
-                    'artists': Artist.query.filter(Artist.name.like('%' + searchQuery + '%')).all(),
+                    'artists': Artist.query.filter(Artist.name.like('%' + searchQuery + '%')).order_by('name').all(),
                     'searchQuery': searchQuery
                 })
             else:
                 return render_template('artists.html', data={
-                    'artists': Artist.query.all(),
+                    'artists': Artist.query.order_by('name').all(),
                     'searchQuery': ''
                 })
         else:
             notifications = [] + pending_notifications
             pending_notifications.clear()
             return render_template('artists.html', data={
-                'artists': Artist.query.all(),
+                'artists': Artist.query.order_by('name').all(),
                 'searchQuery': ''
             }, notifications=notifications)
 
@@ -34,7 +34,7 @@ class ArtistRouter:
         pending_notifications.clear()
         return render_template('artist.html', data={
             'artist': Artist.query.get(artist_id),
-            'shows': Show.query.filter(Show.artist_id == artist_id)
+            'shows': Show.query.filter(Show.artist_id == artist_id).order_by('start_time').all()
         }, notifications=notifications)
 
     def create():

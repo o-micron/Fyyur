@@ -15,17 +15,17 @@ class VenueRouter:
             searchQuery = searchQuery.lstrip()
             if searchQuery:
                 return render_template('venues.html', data={
-                    'venues': Venue.query.filter(Venue.name.like('%' + searchQuery + '%')).all(),
+                    'venues': Venue.query.filter(Venue.name.like('%' + searchQuery + '%')).order_by('name').all(),
                     'searchQuery': searchQuery
                 }, notifications=notifications)
             else:
                 return render_template('venues.html', data={
-                    'venues': Venue.query.all(),
+                    'venues': Venue.query.order_by('name').all(),
                     'searchQuery': ''
                 }, notifications=notifications)
         else:
             return render_template('venues.html', data={
-                'venues': Venue.query.all(),
+                'venues': Venue.query.order_by('name').all(),
                 'searchQuery': ''
             }, notifications=notifications)
 
@@ -34,7 +34,7 @@ class VenueRouter:
         pending_notifications.clear()
         return render_template('venue.html', data={
             'venue': Venue.query.get(venue_id),
-            'shows': Show.query.filter(Show.venue_id == venue_id)
+            'shows': Show.query.filter(Show.venue_id == venue_id).order_by('start_time').all()
         }, notifications=notifications)
 
     def create():

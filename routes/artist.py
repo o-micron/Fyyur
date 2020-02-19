@@ -9,22 +9,23 @@ DEFAULT_PAGINATION_COUNT = 8
 
 class ArtistRouter:
     def view_all():
+        notifications = [] + pending_notifications
+        pending_notifications.clear()
         if request.method == 'POST':
             searchQuery = request.form.get('searchQuery')
             searchQuery = searchQuery.lstrip()
+            searchQuery = searchQuery.rstrip()
             if searchQuery:
                 return render_template('artists.html', data={
                     'artists': Artist.query.filter(Artist.name.like('%' + searchQuery + '%')).order_by('name').all(),
                     'searchQuery': searchQuery
-                })
+                }, notifications=notifications)
             else:
                 return render_template('artists.html', data={
                     'artists': Artist.query.order_by('name').all(),
                     'searchQuery': ''
-                })
+                }, notifications=notifications)
         else:
-            notifications = [] + pending_notifications
-            pending_notifications.clear()
             if 'filter' in request.args:
                 if request.args['filter'] == 'recent':
                     return render_template('artists.html', data={

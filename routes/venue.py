@@ -13,6 +13,7 @@ class VenueRouter:
         if request.method == 'POST':
             searchQuery = request.form.get('searchQuery')
             searchQuery = searchQuery.lstrip()
+            searchQuery = searchQuery.rstrip()
             if searchQuery:
                 return render_template('venues.html', data={
                     'venues': Venue.query.filter(Venue.name.like('%' + searchQuery + '%')).order_by('name').all(),
@@ -24,6 +25,18 @@ class VenueRouter:
                     'searchQuery': ''
                 }, notifications=notifications)
         else:
+            if 'filter' in request.args:
+                if request.args['filter'] == 'recent':
+                    return render_template('venues.html', data={
+                        'venues': Venue.fetch_recent(request.args.get('cpp', default=Venue.COUNT_PER_PAGE, type=int)),
+                        'searchQuery': ''
+                    }, notifications=notifications)
+                if request.args['filter'] == 'top':
+                    return render_template('venues.html', data={
+                        'venues': Venue.fetch_top(request.args.get('cpp', default=Venue.COUNT_PER_PAGE, type=int)),
+                        'searchQuery': ''
+                    }, notifications=notifications)
+
             return render_template('venues.html', data={
                 'venues': Venue.query.order_by('name').all(),
                 'searchQuery': ''

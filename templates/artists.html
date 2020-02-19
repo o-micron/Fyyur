@@ -13,7 +13,7 @@
       </form>
     </div>
     <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1">
-      {% for artist in data.artists|sort(attribute='name') %}
+      {% for artist in data.artists %}
       <div class="col mb-4">
         <div class="card h-100">
           <img src="{{ artist.image_link }}" class="card-img-top" alt="..." />

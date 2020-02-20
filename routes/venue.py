@@ -38,7 +38,7 @@ class VenueRouter:
                     }, notifications=notifications)
 
             return render_template('venues.html', data={
-                'venues': Venue.query.order_by('name').all(),
+                'venues': Venue.group_by_location(),
                 'searchQuery': ''
             }, notifications=notifications)
 

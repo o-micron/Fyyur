@@ -1,7 +1,7 @@
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from models.shared import db
-from sqlalchemy import func, desc
+from sqlalchemy import func, desc, asc
 
 class Venue(db.Model):
     __tablename__ = 'venues'
@@ -85,3 +85,7 @@ class Venue(db.Model):
             return data[:cpp]
         else:
             return data
+
+    def group_by_location():
+        data = Venue.query.group_by(Venue.id, Venue.state, Venue.city).order_by(Venue.state, Venue.city, Venue.name).all()
+        return data

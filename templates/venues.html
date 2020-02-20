@@ -12,23 +12,23 @@
           <h5 class="text-info" style="margin-top: 10px;">{{ data.venues|length }} venues</h5>
         </div>
       </form>
-      {% for city, city_group in data.venues|sort(attribute='city')|groupby('city') %}
+      {% set vars = {'last': ''} %}
+      {% for venue_groups in data.venues %}
       <div class="container">
+        {% if vars.last != venue_groups.city %}
+        {% if vars.update({'last': venue_groups.city }) %} {% endif %}
         <div class="row">
-          <h3 href="">{{ city }}</h3>
+          <h3 href="">{{ venue_groups.city }}, {{ venue_groups.state }}</h3>
         </div>
-        {% for venue in data.venues %}
-          {% if venue.city == city %}
+        {% endif %}
           <div class="container">
             <div class="mid">
               <span class="text-primary" style="padding: 10px;">
                 <i class="fas fa-music"></i>
               </span>
-              <a href="/venues/{{ venue.id }}">{{ venue.name }}</a>
+              <a href="/venues/{{ venue_groups.id }}">{{ venue_groups.name }}</a>
             </div>
           </div>
-          {% endif %}
-        {% endfor %}
       </div>
       {% endfor %}
     </div>

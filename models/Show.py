@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
-from models.shared import db
+from models.shared import db, pending_notifications
+from utils.parser import parse_error
 
 
 class Show(db.Model):
@@ -21,3 +22,41 @@ class Show(db.Model):
         artist_id: {self.artist_id}>
         venue_id: {self.venue_id},
         '''
+
+    def rollback(self):
+        db.session.rollback()
+
+    def insert(self):
+        try:
+            db.session.add(self)
+            db.session.commit()
+            pending_notifications.append({"title": "Success", "body": "Created a new show successfully"})
+            return True
+        except Exception as ex:
+            self.rollback()
+            status = parse_error(ex.orig)
+            pending_notifications.append({"title": "Failure", "body": status})
+            return False
+
+    def update(self):
+        try:
+            db.session.commit()
+            return True
+        except Exception as ex:
+            self.rollback()
+            return ex
+
+    def delete(self):
+        try:
+            db.session.delete(self)
+            db.session.commit()
+            return True
+        except Exception as ex:
+            self.rollback()
+            return ex
+
+    def create_from_form(form):
+        artist_id = form.artist_id.data
+        venue_id = form.venue_id.data
+        start_time = form.start_time.data
+        return Show(artist_id=artist_id, venue_id=venue_id, start_time=start_time)

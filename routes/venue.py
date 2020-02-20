@@ -2,77 +2,39 @@ import json
 from flask import render_template, url_for, redirect, request
 from models.Venue import Venue
 from models.Show import Show
-from models.shared import db, pending_notifications
+from models.shared import db, fetch_unread_notifications
 from forms.Venue import VenueForm
 
 
 class VenueRouter:
     def view_all():
-        notifications = [] + pending_notifications
-        pending_notifications.clear()
+        searchQuery = ''
+        items = Venue.group_by_location()
         if request.method == 'POST':
-            searchQuery = request.form.get('searchQuery')
-            searchQuery = searchQuery.lstrip()
-            searchQuery = searchQuery.rstrip()
-            if searchQuery:
-                return render_template('venues.html', data={
-                    'venues': Venue.query.filter(Venue.name.like('%' + searchQuery + '%')).order_by('name').all(),
-                    'searchQuery': searchQuery
-                }, notifications=notifications)
-            else:
-                return render_template('venues.html', data={
-                    'venues': Venue.query.order_by('name').all(),
-                    'searchQuery': ''
-                }, notifications=notifications)
+            searchQuery = request.form.get('searchQuery').lstrip().rstrip()
+            items = Venue.search_for(searchQuery)
         else:
             if 'filter' in request.args:
                 if request.args['filter'] == 'recent':
-                    return render_template('venues.html', data={
-                        'venues': Venue.fetch_recent(request.args.get('cpp', default=Venue.COUNT_PER_PAGE, type=int)),
-                        'searchQuery': ''
-                    }, notifications=notifications)
+                    items = Venue.fetch_recent(request.args.get('cpp', default=Venue.COUNT_PER_PAGE, type=int))
                 if request.args['filter'] == 'top':
-                    return render_template('venues.html', data={
-                        'venues': Venue.fetch_top(request.args.get('cpp', default=Venue.COUNT_PER_PAGE, type=int)),
-                        'searchQuery': ''
-                    }, notifications=notifications)
-
-            return render_template('venues.html', data={
-                'venues': Venue.group_by_location(),
-                'searchQuery': ''
-            }, notifications=notifications)
+                    items = Venue.fetch_top(request.args.get('cpp', default=Venue.COUNT_PER_PAGE, type=int))
+        return render_template('venues.html', data={
+            'venues': items,
+            'searchQuery': searchQuery
+        }, notifications=fetch_unread_notifications())
 
     def view_detail(venue_id):
-        notifications = [] + pending_notifications
-        pending_notifications.clear()
         return render_template('venue.html', data={
             'venue': Venue.query.get(venue_id),
             'shows': Show.query.filter(Show.venue_id == venue_id).order_by('start_time').all()
-        }, notifications=notifications)
+        }, notifications=fetch_unread_notifications())
 
     def create():
         form = VenueForm(request.form)
         if form.validate_on_submit():
-            name = form.name.data
-            city = form.city.data
-            state = form.state.data
-            address = form.address.data
-            phone = form.phone.data
-            genres = ','.join(form.genres.data)
-            facebook_link = form.facebook_link.data
-            venue = Venue(name=name, city=city, state=state, phone=phone, address=address, genres=genres, facebook_link=facebook_link)
-            db.session.add(venue)
-            try:
-                db.session.commit()
-                pending_notifications.append({"title": "Success", "body": "Created a new venue successfully"})
+            venue = Venue.create_from_form(form)
+            if venue.insert():
                 return redirect(url_for('view_all_venues'))
-            except Exception as err:
-                db.session.rollback()
-                pending_notifications.append({"title": "Failure", "body": "Invalid Data, Couldn't create a new venue"})
-                notifications = [] + pending_notifications
-                pending_notifications.clear()
-                print(err)
-                return render_template('forms/create_venue.html', form=form, notifications=notifications)
-        notifications = [] + pending_notifications
-        pending_notifications.clear()
-        return render_template('forms/create_venue.html', form=form, notifications=notifications)
+            return render_template('forms/create_venue.html', form=form, notifications=fetch_unread_notifications())
+        return render_template('forms/create_venue.html', form=form, notifications=fetch_unread_notifications())

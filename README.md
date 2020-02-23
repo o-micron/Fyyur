@@ -18,13 +18,14 @@ pip3 install -r requirements.txt
 
 `createdb toy`
 
-`FLASK_APP=app.py FLASK_DEBUG=true flask run`
-
 `flask db init`
 
 `flask db migrate`
 
 `flask db upgrade`
+
+`FLASK_APP=app.py FLASK_DEBUG=true flask run`
+
 
 # Todo
 

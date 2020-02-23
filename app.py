@@ -49,7 +49,6 @@ def server_error(error):
 def index():
     return render_template('index.html')
 
-
 @app.route('/artists', methods=['GET', 'POST'])
 def view_all_artists():
     return ArtistRouter.view_all()
@@ -62,6 +61,10 @@ def view_artist(artist_id):
 @app.route('/artists/create', methods=['GET', 'POST'])
 def create_artist():
     return ArtistRouter.create()
+
+@app.route('/artists/autocomplete', methods=['GET'])
+def autocomplete_artist():
+    return ArtistRouter.autocomplete()
 
 
 @app.route('/shows')
@@ -81,7 +84,6 @@ def create_show():
 def view_all_venues():
     return VenueRouter.view_all()
 
-
 @app.route('/venues/<venue_id>')
 def view_venue(venue_id):
     return VenueRouter.view_detail(venue_id)
@@ -89,4 +91,8 @@ def view_venue(venue_id):
 @app.route('/venues/create', methods=['GET', 'POST'])
 def create_venue():
     return VenueRouter.create()
+
+@app.route('/venues/autocomplete', methods=['GET'])
+def autocomplete_venue():
+    return VenueRouter.autocomplete()
 ## -----------------------------------------------------------------------------------------------

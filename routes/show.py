@@ -3,7 +3,8 @@ import json
 from flask import render_template, url_for, redirect, request
 from models.Show import Show
 from models.shared import db, fetch_unread_notifications
-from forms.Show import ShowForm
+from forms.Show import ShowForm, ValidationError
+from pprint import pprint
 
 class ShowRouter:
     def view_all():
@@ -19,8 +20,11 @@ class ShowRouter:
     def create():
         form = ShowForm(request.form)
         if form.validate_on_submit():
-            show = Show.create_from_form(form)
-            if show.insert():
-                return redirect(url_for('view_all_shows'))
-            return render_template('forms/create_show.html', form=form, notifications=fetch_unread_notifications())
+            (form, show) = Show.create_from_form(form)
+            if show is not None:
+                if show.insert():
+                    return redirect(url_for('view_all_shows'))
+                return render_template('forms/create_show.html', form=form, notifications=fetch_unread_notifications())
+            else:
+                return render_template('forms/create_show.html', form=form, notifications=fetch_unread_notifications())
         return render_template('forms/create_show.html', form=form, notifications=fetch_unread_notifications())

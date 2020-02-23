@@ -1,43 +1,46 @@
 {% set navlinks = [ { 'name': 'Venues', 'class': '', 'link': '/venues'}, {
-'name': 'Artists', 'class': '', 'link': '/artists'}, { 'name':
-'Shows', 'class': '', 'link': '/shows'} ] %}
+'name': 'Artists', 'class': '', 'link': '/artists'}, { 'name': 'Shows', 'class':
+'', 'link': '/shows'} ] %}
 {% extends 'layouts/main.html' %}
-{% block title %}Create Show{% endblock %}
+{% block title %}Fyyur|Create Show{% endblock %}
+{% block styles %}
+<link href="../static/css/typeaheadjs.css" rel="stylesheet">
+<style>
+  .scrollable-dropdown-menu .tt-dropdown-menu {
+    max-height: 150px;
+    overflow-y: auto;
+  }
+</style>
+{% endblock %}
 {% block content %}
 <div class="container">
   <div class="mid">
     <div style="margin-top: 5px; margin-bottom: 10px;">
       <div>
         <h3 style="text-align: left; margin-bottom: 30px;">
-            CREATE A NEW SHOW
+          CREATE A NEW SHOW
         </h3>
       </div>
       <form action="" method="POST">
         {{ form.hidden_tag() }}
-        <div class="form-group" style="text-align: left;">
-          <label>Artist ID <span class="text-danger">*</span> </label>
+        <div class="form-group scrollable-dropdown-menu" style="text-align: left;">
+          <label>Artist Name <span class="text-danger">*</span> </label>
           <span style="display:inline-block; width:5px;"></span>
-          <small class="text-warning">found in the artist's profile page</small>
           {% if 'artist_id' in form.errors %}
-          {{ form.artist_id(class_='form-control is-invalid', placeholder="artist id", autofocus=true) }}
-          <div class="invalid-feedback" style="text-align: left;">
-            {{ form.errors['artist_id'][0] }}
-          </div>
+          <small class="text-danger">{{ form.errors['artist_id'][0] }}</small>
+          {{ form.artist_id(class_='form-control is-invalid', type="text", id="artist_name_field", placeholder="artist name", autofocus=true) }} 
           {% else %}
-          {{ form.artist_id(class_='form-control', placeholder="artist id", autofocus=true) }}
+          {{ form.artist_id(class_='form-control', type="text", id="artist_name_field", placeholder="artist name", autofocus=true) }} 
           {% endif %}
         </div>
-        <div class="form-group" style="text-align: left;">
-          <label>Venue ID <span class="text-danger">*</span> </label>
+        <div class="form-group scrollable-dropdown-menu" style="text-align: left;">
+          <label>Venue Name <span class="text-danger">*</span> </label>
           <span style="display:inline-block; width:5px;"></span>
-          <small class="text-warning">found in the venue's profile page</small>
           {% if 'venue_id' in form.errors %}
-          {{ form.venue_id(class_='form-control is-invalid', placeholder="venue id", autofocus=true) }}
-          <div class="invalid-feedback" style="text-align: left;">
-            {{ form.errors['venue_id'][0] }}
-          </div>
+          <small class="text-danger">{{ form.errors['venue_id'][0] }}</small>
+          {{ form.venue_id(class_='form-control is-invalid', id="venue_name_field", placeholder="venue name", autofocus=true) }}
           {% else %}
-          {{ form.venue_id(class_='form-control', placeholder="venue id", autofocus=true) }}
+          {{ form.venue_id(class_='form-control', id="venue_name_field", placeholder="venue name", autofocus=true) }}
           {% endif %}
         </div>
         <div class="form-group" style="text-align: left;">
@@ -54,7 +57,11 @@
           {% endif %}
         </div>
         <div class="form-group">
-          <input type="submit" value="Create Show" class="btn btn-primary btn-lg btn-block" />
+          <input
+            type="submit"
+            value="Create Show"
+            class="btn btn-primary btn-lg btn-block"
+          />
         </div>
       </form>
     </div>
@@ -62,4 +69,50 @@
 </div>
 {% endblock %}
 {% block scripts %}
+<script src="http://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
+<script>
+  fetch("/artists/autocomplete", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(response => {
+      return response.json();
+  }).then(json => {
+    var artists = json['artists_names'];
+    var artists = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.whitespace,
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        local: artists
+    });
+    $('.scrollable-dropdown-menu #artist_name_field').typeahead(null,
+    {
+        name: 'artists',
+        limit: 4,
+        source: artists
+    });
+  }).catch(err => {});
+
+  fetch("/venues/autocomplete", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(response => {
+      return response.json();
+  }).then(json => {
+    var venues = json['venues_names'];
+    var venues = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.whitespace,
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        local: venues
+    });
+    $('.scrollable-dropdown-menu #venue_name_field').typeahead(null,
+    {
+        name: 'venues',
+        limit: 4,
+        source: venues
+    });
+  }).catch(err => {});
+</script>
 {% endblock %}

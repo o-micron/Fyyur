@@ -1,5 +1,5 @@
 import json
-from flask import render_template, url_for, redirect, request, flash
+from flask import render_template, url_for, redirect, request, flash, jsonify
 from models.Artist import Artist
 from forms.Artist import ArtistForm
 from models.Show import Show
@@ -39,3 +39,6 @@ class ArtistRouter:
                 return redirect(url_for('view_all_artists'))
             return render_template('forms/create_artist.html', form=form, notifications=fetch_unread_notifications())
         return render_template('forms/create_artist.html', form=form, notifications=fetch_unread_notifications())
+
+    def autocomplete():
+        return jsonify({ 'artists_names': [artist.name for artist in Artist.query.order_by('name').all()] })

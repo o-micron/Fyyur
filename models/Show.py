@@ -1,4 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
+from models.Artist import Artist
+from models.Venue import Venue
 from models.shared import db, pending_notifications
 from utils.parser import parse_error
 
@@ -56,7 +58,14 @@ class Show(db.Model):
             return ex
 
     def create_from_form(form):
-        artist_id = form.artist_id.data
-        venue_id = form.venue_id.data
+        artist = Artist.get_by_name(form.artist_id.data)
+        venue = Venue.get_by_name(form.venue_id.data)
         start_time = form.start_time.data
-        return Show(artist_id=artist_id, venue_id=venue_id, start_time=start_time)
+        if artist is None:
+            form.artist_id.errors.append('Please enter a valid artist name')
+        if venue is None:
+            form.venue_id.errors.append('Please enter a valid venue name')
+        if artist is not None and venue is not None:
+            return (form, Show(artist_id=artist.id, venue_id=venue.id, start_time=start_time))
+        else:
+            return (form, None)

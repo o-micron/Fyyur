@@ -1,5 +1,5 @@
 import json
-from flask import render_template, url_for, redirect, request
+from flask import render_template, url_for, redirect, request, jsonify
 from models.Venue import Venue
 from models.Show import Show
 from models.shared import db, fetch_unread_notifications
@@ -38,3 +38,6 @@ class VenueRouter:
                 return redirect(url_for('view_all_venues'))
             return render_template('forms/create_venue.html', form=form, notifications=fetch_unread_notifications())
         return render_template('forms/create_venue.html', form=form, notifications=fetch_unread_notifications())
+
+    def autocomplete():
+        return jsonify({ 'venues_names': [venue.name for venue in Venue.query.order_by('name').all()] })

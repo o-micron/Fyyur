@@ -70,6 +70,13 @@ class Venue(db.Model):
             self.rollback()
             return ex
 
+    def get_by_name(name):
+        try:
+            venue = Venue.query.filter(Venue.name == name).one()
+            return venue
+        except Exception:
+            return None
+
     def create_from_form(form):
         name = form.name.data
         city = form.city.data

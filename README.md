@@ -26,14 +26,3 @@ pip3 install -r requirements.txt
 
 `FLASK_APP=app.py FLASK_DEBUG=true flask run`
 
-
-# Todo
-
-- [ ] Validate Forms
-- [ ] Implement Edit for Artists, Venues and Shows
-- [ ] Add Home or Landing page
-- [ ] Implement search for Artists, Venues
-- [ ] Implement pagination for All Artists, Venues and shows views
-- [ ] add more search filters
-- [ ] show popular artists
-- [ ] show artists seeking venues and venues seeking talents
